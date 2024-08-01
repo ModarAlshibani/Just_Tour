@@ -50,39 +50,39 @@ class TeamHomepage extends StatelessWidget{
                     height: 500,
                     width: double.infinity,
                                 
-                    child: ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      itemCount: tripsList.length,
-                      itemBuilder: (context, index) {
-                        return InkWell(
-                          // onTap: () => Get.to(TripDetailScreen(
-                          //   tripId: tripsList[index].tripId,
-                          //   place: tripsList[index].place,
-                          //   type: tripsList[index].type,
-                          //   title: tripsList[index].title,
-                          //   coverPic: tripsList[index].coverPic,
-                          //   startDate: tripsList[index].startDate,
-                          //   endDate: tripsList[index].startDate,
-                          //   startBooking: tripsList[index].startDate,
-                          //   endBooking: tripsList[index].startDate,
-                          //   level: tripsList[index].level.toString(),
-                          //   cost: tripsList[index].cost,
-                          //   retrieve: tripsList[index].retrieve,
-                          //   teamName: tripsList[index].team,
-                          //   description: tripsList[index].description,
-                          //   pics: tripsList[index].pics,
-                          //   subLimit: tripsList[index].subLimit,
-                          // )),
-                          // child: TripOutSide(
-                          //   name: tripsList[index].title,
-                          //   date: tripsList[index].startDate,
-                          //   pic: tripsList[index].coverPic,
-                          //   price: tripsList[index].cost,
-                          //   team: tripsList[index].team,
-                          //   discreption: tripsList[index].description,
-                          // ),
-                        );
-                      }),
+                    // child: ListView.builder(
+                    //   scrollDirection: Axis.vertical,
+                    //   itemCount: tripsList.length,
+                    //   itemBuilder: (context, index) {
+                    //     return InkWell(
+                    //       onTap: () => Get.to(TripDetailScreen(
+                    //         tripId: tripsList[index].tripId,
+                    //         place: tripsList[index].place,
+                    //         type: tripsList[index].type,
+                    //         title: tripsList[index].title,
+                    //         coverPic: tripsList[index].coverPic,
+                    //         startDate: tripsList[index].startDate,
+                    //         endDate: tripsList[index].startDate,
+                    //         startBooking: tripsList[index].startDate,
+                    //         endBooking: tripsList[index].startDate,
+                    //         level: tripsList[index].level.toString(),
+                    //         cost: tripsList[index].cost,
+                    //         retrieve: tripsList[index].retrieve,
+                    //         teamName: tripsList[index].team,
+                    //         description: tripsList[index].description,
+                    //         pics: tripsList[index].pics,
+                    //         subLimit: tripsList[index].subLimit,
+                    //       )),
+                    //       child: TripOutSide(
+                    //         name: tripsList[index].title,
+                    //         date: tripsList[index].startDate,
+                    //         pic: tripsList[index].coverPic,
+                    //         price: tripsList[index].cost,
+                    //         team: tripsList[index].team,
+                    //         discreption: tripsList[index].description,
+                    //       ),
+                    //     );
+                    //   }),
                   ),
                 ],
               ),
