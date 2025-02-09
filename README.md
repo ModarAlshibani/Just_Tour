@@ -23,6 +23,4 @@ A huge shoutout to my amazing team for their hard work and dedication! 🙌
 
 If you’re interested in learning more about the project or collaborating on similar initiatives, feel free to reach out! Let’s connect and explore how technology can transform the travel industry. 🌟  
 
-Project link: .....
-
-#Flutter #MobileDevelopment #TourismTech #Syria #TravelApp #FrontEndDevelopment #TechForGood #Collaboration #Innovation #LinkedInPost
+#Flutter #MobileDevelopment #TourismTech #Syria #TravelApp #FrontEndDevelopment #TechForGood #Collaboration #Innovation 
