@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:terez/core/constant/appColors.dart';
+import 'package:JustTour/core/constant/appColors.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final String? label;
@@ -7,7 +7,7 @@ class CustomTextFormField extends StatelessWidget {
   final Icon? icon;
   final String? Function(String?)? valid;
   final TextEditingController? myController;
-  
+
   const CustomTextFormField(
       {super.key,
       this.label,
@@ -22,7 +22,7 @@ class CustomTextFormField extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 40),
       child: TextFormField(
         validator: valid,
-        keyboardType:TextInputType.visiblePassword,
+        keyboardType: TextInputType.visiblePassword,
         decoration: InputDecoration(
           hintText: hint,
           hintStyle: TextStyle(
@@ -30,7 +30,7 @@ class CustomTextFormField extends StatelessWidget {
               fontWeight: FontWeight.w300,
               color: AppColors.rumSwizzle),
           floatingLabelBehavior: FloatingLabelBehavior.always,
-          label: Container( 
+          label: Container(
               child: Text(
             label!,
             style: Theme.of(context)
@@ -46,7 +46,6 @@ class CustomTextFormField extends StatelessWidget {
             borderSide: BorderSide(color: AppColors.paleGold, width: 1.0),
             borderRadius: BorderRadius.circular(10),
           ),
-          
         ),
         controller: myController,
       ),

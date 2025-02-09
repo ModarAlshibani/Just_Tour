@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:terez/core/constant/appColors.dart';
+import 'package:JustTour/core/constant/appColors.dart';
 
 class EnrollementTextField extends StatelessWidget {
   final String? label;

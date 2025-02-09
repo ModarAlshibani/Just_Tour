@@ -8,6 +8,7 @@ class TeamModel {
   String? Email;
   int? Rate;
   String? ContactInfo;
+  int? Wallet;
 
 
   TeamModel(
@@ -17,7 +18,8 @@ class TeamModel {
       this.Description,
       this.Email,
       this.Rate,
-      this.ContactInfo
+      this.ContactInfo,
+      this.Wallet
       });
 
   Map<String, dynamic> toJson() => {
@@ -27,7 +29,8 @@ class TeamModel {
         'ProfilePhoto': ProfilePhoto,
         'ContactInfo': ContactInfo,
         'TeamName': TeamName,
-        'Rate': Rate
+        'Rate': Rate,
+        'Wallet': Wallet 
       };
 
   TeamModel.fromJson(Map<String, dynamic> json)
@@ -37,7 +40,8 @@ class TeamModel {
         Description = json['Description'],
         Email = json['Email'],
         Rate = json['Rate'],
-        ContactInfo = json['ContactInfo'];
+        ContactInfo = json['ContactInfo'],
+        Wallet = json['Wallet'];
 }
 
 List<TeamModel> TeamsListFromJson(String str) {

@@ -1,15 +1,17 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'dart:io';
+import 'dart:typed_data';
+import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:terez/APIs.dart';
+import 'package:JustTour/APIs.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:terez/controller/auth/Token.dart';
-import 'package:terez/view/screens/TeamUI/teamNavbar.dart';
+import 'package:JustTour/controller/auth/Token.dart';
+import 'package:JustTour/view/screens/TeamUI/teamNavbar.dart';
 
 abstract class AddTripController extends GetxController {
   //addTrip();
@@ -31,18 +33,42 @@ class AddTripControllerImp extends AddTripController {
   late TextEditingController Requirements;
   late TextEditingController Description;
   late TextEditingController Retrieve;
-  late TextEditingController TripPhoto;
+  File? TripPhoto;
   late TextEditingController RetrieveEndDate;
   late TextEditingController Percent;
 
+  Future<http.Response> uploadSingleImage({
+    required String url,
+    required String imagepath,
+    required Map<String, String> fields,
+    required Map<String, String> headers,
+    required File? imageFile,
+  }) async {
+    // Correctly parse the URL into a Uri
+    final uri = Uri.parse(url);
+
+    var request = http.MultipartRequest('POST', uri);
+    if (imageFile != null) {
+      request.files
+          .add(await http.MultipartFile.fromPath(imagepath, imageFile.path));
+    }
+
+    request.headers.addAll(headers);
+    request.fields.addAll(fields);
+
+    final streamedResponse = await request.send();
+    final response = await http.Response.fromStream(streamedResponse);
+
+    // Check for successful upload
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      return response;
+    } else {
+      throw Exception('Failed to upload image: ${response.reasonPhrase}');
+    }
+  }
+
   Future<void> AddTrip() async {
-    // For me to check if the data I'm sending is right
-    print("StartDate: ${StartDate.text.toString()}");
-    print("EndDate: ${EndDate.text.toString()}");
-    print("StartBooking: ${StartBooking.text.toString()}");
-    print("EndBooking: ${EndBooking.text.toString()}");
-    print("EndBooking: ${RetrieveEndDate.text.toString()}");
-    final Map<String, dynamic> body = {
+    final Map<String, String> body = {
       "Title": Title.text,
       "Location": Location.text,
       "StartDate": DateTime.parse(StartDate.text).toIso8601String(),
@@ -51,53 +77,45 @@ class AddTripControllerImp extends AddTripController {
       "EndBooking": DateTime.parse(EndBooking.text).toIso8601String(),
       "Type": Type.text.toString(),
       "Level": Level.text.toString(),
-      "SubLimit": int.parse(SubLimit.text),
-      "Cost": int.parse(Cost.text),
+      "SubLimit": int.parse(SubLimit.text).toString(),
+      "Cost": int.parse(Cost.text).toString(),
       "Description": Description.text,
       "Retrieve": Retrieve.text,
       "Requirements": Requirements.text,
-      "TripPhoto": TripPhoto.text,
       "RetrieveEndDate": DateTime.parse(RetrieveEndDate.text).toIso8601String(),
-      "Percent": int.parse(Percent.text),
+      "Percent": int.parse(Percent.text).toString(),
     };
-    print("Request body: ${jsonEncode(body)}");
 
     try {
-      final response = await http.post(
-        Uri.parse(API.addTrip),
+      final response = await uploadSingleImage(
+        fields: body,
         headers: {
           "Accept": "application/json",
-          "Content-Type": "application/json",
+          "Content-Type":
+              "multipart/form-data", // Adjust Content-Type accordingly
           "Authorization":
-              "Bearer ${Get.find<GlobalStateController>().getToken()}"
+              "Bearer ${Get.find<GlobalStateController>().getToken()}",
         },
-        body: jsonEncode(body), // Convert the body to a JSON string
+        imagepath: 'TripPhoto', // Ensure this matches the server's expectation
+        url: Uri.parse(API.addTrip)
+            .toString(), // Make sure API.addTrip is a valid URL
+        imageFile: TripPhoto,
       );
+      print(response.statusCode);
+
       final jsonResponse = jsonDecode(response.body);
-      print("status is: ");
-      print(Get.find<GlobalStateController>().getToken());
-      print(response.body);
-      print(jsonResponse["status"]);
 
       if (response.statusCode == 200 && jsonResponse["status"] == true) {
-        // Parse the response JSON
         print(jsonResponse["message"]);
-
-        // Navigate to the next screen or update UI as needed
         Get.to(TeamNavbar());
       } else {
-        print("Failed to add the trip");
-        print(response.statusCode);
         final responseBody = jsonDecode(response.body);
-        String errorMessage = responseBody['message'] ?? "some error";
-
+        String errorMessage =
+            responseBody['message'] ?? "An unknown error occurred";
         Get.dialog(
           AlertDialog(
             title: Text("Adding Trip Failed"),
-            content: Text(
-              errorMessage,
-              style: TextStyle(color: Colors.black),
-            ),
+            content: Text(errorMessage),
             actions: [
               TextButton(
                 child: Text("OK"),
@@ -132,7 +150,7 @@ class AddTripControllerImp extends AddTripController {
     Description = TextEditingController();
     Retrieve = TextEditingController();
     Requirements = TextEditingController();
-    TripPhoto = TextEditingController();
+    // TripPhoto = TextEditingController();
     RetrieveEndDate = TextEditingController();
     Percent = TextEditingController();
     // TODO: implement onInit
@@ -158,7 +176,7 @@ class AddTripControllerImp extends AddTripController {
     Description.dispose();
     Retrieve.dispose();
     Requirements.dispose();
-    TripPhoto.dispose();
+    // TripPhoto.dispose();
     RetrieveEndDate.dispose();
     Percent.dispose();
     // TODO: implement dispose

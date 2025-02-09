@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:terez/APIs.dart';
+import 'package:JustTour/APIs.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:terez/controller/auth/Token.dart';
-import 'package:terez/view/screens/TeamUI/teamNavbar.dart';
-import 'package:terez/view/screens/Trips/tripDetailsScreenUser%20(2).dart';
-import 'package:terez/view/screens/navbar.dart';
+import 'package:JustTour/controller/auth/Token.dart';
+import 'package:JustTour/view/screens/TeamUI/teamNavbar.dart';
+import 'package:JustTour/view/screens/Trips/tripDetailsScreenUser%20(2).dart';
+import 'package:JustTour/view/screens/navbar.dart';
 
 abstract class JoinTripController extends GetxController {
   // reserve(int id);
@@ -23,16 +23,18 @@ class JoinTripControllerImp extends JoinTripController {
     // For me to check if the data I'm sending
     print("Count: ${Count.text}");
     print("names: ${names.text}");
-
+    print(
+        "ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
+    print(Get.find<GlobalStateController>().getToken());
     Names = names.text.split(',');
     print(Names);
 
     final Map<String, dynamic> body = {
       "TripId": id,
       "Count": int.parse(Count.text),
-      "Names": Names,
+      "Names": names.text,
     };
-    print("Request body: ${jsonEncode(body)}");
+    // print("Request body: ${jsonEncode(body)}");
 
     try {
       final response = await http.post(
@@ -50,10 +52,12 @@ class JoinTripControllerImp extends JoinTripController {
       final jsonResponse = jsonDecode(response.body);
       print(
           "====================================================================");
-      // print(jsonResponse["Status"]);
+      print(jsonResponse["Message"]);
+      print(response.statusCode);
 
-      if (response.statusCode == 200 &&
-          jsonResponse["Message"] == "Reservation Completed!") {
+      if (response.statusCode == 200) {
+        print(
+            "=========Status code 200 ========================================================");
         print("Reservation successful");
         print(jsonResponse["Message"]);
 
@@ -80,7 +84,7 @@ class JoinTripControllerImp extends JoinTripController {
         print("Failed to Reserve a trip");
         print(response.statusCode);
         final responseBody = jsonDecode(response.body);
-        String errorMessage = responseBody['message'] ?? "Error Occured";
+        // String errorMessage = responseBody['Message'] ?? "errepihikugutyfytdyh";
         print(
             "====================================================================");
 
@@ -88,7 +92,7 @@ class JoinTripControllerImp extends JoinTripController {
           AlertDialog(
             title: Text("Reservation Failed"),
             content: Text(
-              errorMessage,
+              jsonResponse['Message'],
               style: TextStyle(color: Colors.black),
             ),
             actions: [
@@ -241,7 +245,6 @@ class JoinTripControllerImp extends JoinTripController {
         String errorMessage = responseBody['message'] ?? "Error Occured";
         print(
             "====================================================================");
-
         Get.dialog(
           AlertDialog(
             title: Text("Cancelation Failed"),

@@ -1,10 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:terez/core/constant/appColors.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:photo_view/photo_view.dart';
-import 'package:http/http.dart' as http;
-import 'package:terez/core/shared/widgets/backButton.dart';
+import 'package:JustTour/core/constant/appColors.dart';
+import 'package:JustTour/core/shared/widgets/backButton.dart';
 
 class TripDetailsPic extends StatelessWidget {
   final String? coverPic;

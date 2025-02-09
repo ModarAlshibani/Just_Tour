@@ -1,5 +1,5 @@
-import 'package:terez/APIs.dart';
-import 'package:terez/core/class/crud.dart';
+import 'package:JustTour/APIs.dart';
+import 'package:JustTour/core/class/crud.dart';
 
 class SignupData {
   Crud crud;

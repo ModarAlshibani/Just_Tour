@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:terez/data/dataSource/statics/static.dart';
+import 'package:JustTour/data/dataSource/statics/static.dart';
 
 abstract class OnBoardingController extends GetxController {
   next();

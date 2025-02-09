@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:terez/controller/auth/login_controller.dart';
-import 'package:terez/core/constant/appColors.dart';
+import 'package:JustTour/controller/auth/login_controller.dart';
+import 'package:JustTour/core/constant/appColors.dart';
 
-
-class Settings extends StatelessWidget{
-
+class Settings extends StatelessWidget {
   @override
-
-  Widget build(BuildContext context){
-
+  Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
         Navigator.of(context).pushReplacementNamed('/teamNav');

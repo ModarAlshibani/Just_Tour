@@ -6,13 +6,17 @@ class PlaceModel {
   String? Location;
   String? Details;
   int? Rate;
+  String? MainPhoto;
+  String? SecondaryPhoto;
 
   PlaceModel(
       {this.id,
       this.SiteName,
       this.Location,
       this.Details,
-      this.Rate,});
+      this.Rate,
+      this.MainPhoto,
+      this.SecondaryPhoto});
 
    Map<String, dynamic> toJson() => {
         'id': id,
@@ -20,6 +24,8 @@ class PlaceModel {
         'Location': Location,
         'Details': Details,
         'Rate': Rate,
+        'MainPhoto' : MainPhoto,
+        'SecondaryPhoto' : SecondaryPhoto
       }; 
 
    PlaceModel.fromJson(Map<String, dynamic> json)
@@ -27,7 +33,9 @@ class PlaceModel {
      SiteName = json['SiteName'],
      Location = json['Location'],
      Details = json['Details'],
-     Rate = json['Rate'];     
+     Rate = json['Rate'],
+     MainPhoto = json['MainPhoto'],
+     SecondaryPhoto = json['SecondaryPhoto'];
 }
 List<PlaceModel> SitesListFromJson(String str) {
   final jsonResponse = jsonDecode(str);

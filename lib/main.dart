@@ -2,20 +2,16 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:terez/Bindings/initialBinding.dart';
-import 'package:terez/Networking/firebase_notifications.dart';
-import 'package:terez/controller/auth/Token.dart';
-import 'package:terez/core/constant/appColors.dart';
-import 'package:terez/core/localization/changeLocalController.dart';
-import 'package:terez/core/localization/translation.dart';
-import 'package:terez/core/services/services.dart';
-import 'package:terez/firebase_options.dart';
-import 'package:terez/routes.dart';
-import 'package:terez/view/screens/DrawerNavigators/Log.dart';
-import 'package:terez/view/screens/DrawerNavigators/myFollowing.dart';
-import 'package:terez/view/screens/auth/login.dart';
-import 'package:terez/view/screens/auth/signup.dart';
-import 'package:terez/view/screens/navbar.dart';
+import 'package:JustTour/Bindings/initialBinding.dart';
+import 'package:JustTour/Networking/firebase_notifications.dart';
+import 'package:JustTour/controller/auth/Token.dart';
+import 'package:JustTour/core/constant/appColors.dart';
+import 'package:JustTour/core/localization/changeLocalController.dart';
+import 'package:JustTour/core/localization/translation.dart';
+import 'package:JustTour/core/services/services.dart';
+import 'package:JustTour/firebase_options.dart';
+import 'package:JustTour/routes.dart';
+import 'package:JustTour/view/screens/onBoarding.dart';
 
 void main() async {
   Get.put(GlobalStateController());
@@ -80,16 +76,17 @@ class MyApp extends StatelessWidget {
     LocalController controller = Get.put(LocalController());
 
     Future<bool> isFirstLaunch() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  bool isFirstTime = prefs.getBool('first_time') ?? true;
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      bool isFirstTime = prefs.getBool('first_time') ?? true;
 
-  if (isFirstTime) {
-    await prefs.setBool('first_time', false);
-    return true; // It's the first time
-  } else {
-    return false; // Not the first time
-  }
-}
+      if (isFirstTime) {
+        await prefs.setBool('first_time', false);
+        return true; // It's the first time
+      } else {
+        return false; // Not the first time
+      }
+    }
+
     return GetMaterialApp(
       translations: MyTranslation(),
       locale: controller.language,
@@ -110,7 +107,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: Login(),
+      home: OnBoarding(),
     );
   }
 }

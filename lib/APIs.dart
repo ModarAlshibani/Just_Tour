@@ -1,5 +1,5 @@
 class API {
-  static const String server = "http://192.168.1.105:8000/api";
+  static const String server = "http://192.168.1.104:8000/api";
 
   //===================Auth=====================//
   static const String signup = "$server/userRegister";
@@ -19,6 +19,7 @@ class API {
   static const String teamGetTrip = "$server/team/getTrip/";
   static const String showTrips = "$server/showTrips/";
   static const String teamsMyTrips = "$server/team/myTrips";
+  static const String teamTripsForUser = "$server/user/teamTrips/";
 
    //=========Edit team profile=========================//
    static const String editTeamProfile = "$server/team/editProfile/";
@@ -37,9 +38,21 @@ class API {
 
    //========= Follow =========================//
   static const String follow = "$server/user/follow/";
+  static const String showFollowingTeams = "$server/user/followingTeams";
+  static const String showTeamFollowers = "$server/team/showFollowers";
 
   //======== Trip Reservation =========//
   static const String reserveTrip = "$server/user/reserveTrip";
   static const String cancelReservation = "$server/user/cancelReservationInfo";
   static const String confirmCancelReservation = "$server/user/confirmCancelReservationInfo";
+  static const String rsteTrip = "$server/user/rateTrip";
+
+ //======== Countestants =========//
+ static const String countestants = "$server/team/showCountestants/";
+
+ //======== Log =========//
+ static const String log = "$server/user/getLog/";
+
+ //========== Rate ==========//
+ static const String rate = "$server/user/rateTrip/";
 }

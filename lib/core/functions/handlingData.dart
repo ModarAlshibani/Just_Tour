@@ -1,4 +1,4 @@
-import 'package:terez/core/class/statusRequest.dart';
+import 'package:JustTour/core/class/statusRequest.dart';
 
 handlingData(response) {
   if (response is StatusRequest) {

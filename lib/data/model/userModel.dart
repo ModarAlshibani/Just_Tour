@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class User {
   int? id;
   String? FirstName;
@@ -8,21 +10,29 @@ class User {
   int? Wallet;
   int? Age;
   String? Token;
-  DateTime? createdAt; // New field for created_at
-  DateTime? updatedAt; // New field for updated_at
 
-  User(
-      {this.id,
-      this.FirstName,
-      this.LastName,
-      this.Number,
-      this.Email,
-      this.Password,
-      this.Wallet,
-      this.Age,
-      this.Token,
-      this.createdAt,
-      this.updatedAt});
+  User({
+    this.id,
+    this.FirstName,
+    this.LastName,
+    this.Number,
+    this.Email,
+    this.Password,
+    this.Wallet,
+    this.Age,
+    this.Token,
+  });
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'FirstName': FirstName,
+        'LastName': LastName,
+        'Number': Number,
+        'Email': Email,
+        'Password': Password,
+        'Wallet': Wallet,
+        'Age': Age
+      };
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -34,24 +44,28 @@ class User {
     Wallet = json['Wallet'];
     Age = json['Age'];
     Token = json['Token'];
-    createdAt: DateTime.parse(json['created_at']);
-    updatedAt: DateTime.parse(json['updated_at']);
     // Assuming the dates are in ISO format, convert them to DateTime objects
   }
+}
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['FirstName'] = this.FirstName;
-    data['LastName'] = this.LastName;
-    data['Number'] = this.Number;
-    data['Email'] = this.Email;
-    data['Password'] = this.Password;
-    data['Wallet'] = this.Wallet;
-    data['Age'] = this.Age;
-    data['Token'] = this.Token;
-    data['creates_at'] = this.createdAt.toString();
-    data['updated_at'] = this.updatedAt.toString();
-    return data;
-  }
+List<User> UserListFromJson(String str) {
+  final jsonResponse = jsonDecode(str);
+  final List<dynamic> dataList = jsonResponse['data'];
+  return dataList.map((item) => User.fromJson(item)).toList();
+}
+
+List<User> CountListFromJson(String str) {
+  final jsonResponse = jsonDecode(str);
+  print("here is the error");
+  final List<dynamic> dataList = jsonResponse['data']['Countestants'];
+  print("pppppppppppppppppppppppppppppppppppppppppppppp");
+  return dataList.map((item) => User.fromJson(item)).toList();
+}
+
+List<User> FollowersListFromJson(String str) {
+  final jsonResponse = jsonDecode(str);
+  print("here is the error");
+  final List<dynamic> dataList = jsonResponse['data'];
+  print("ffffffffffffffffffffffffffffffffffffffffffffffffffff");
+  return dataList.map((item) => User.fromJson(item)).toList();
 }

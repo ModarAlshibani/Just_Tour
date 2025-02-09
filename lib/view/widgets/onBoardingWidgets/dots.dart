@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:terez/controller/onBoarding_Controller.dart';
-import 'package:terez/core/constant/appColors.dart';
-import 'package:terez/data/dataSource/statics/static.dart';
+import 'package:JustTour/controller/onBoarding_Controller.dart';
+import 'package:JustTour/core/constant/appColors.dart';
+import 'package:JustTour/data/dataSource/statics/static.dart';
 
 class DotsOnBoarding extends StatelessWidget {
   const DotsOnBoarding({super.key});

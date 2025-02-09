@@ -1,15 +1,11 @@
 import 'package:get/get.dart';
-import 'package:terez/APIs.dart';
+import 'package:JustTour/APIs.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:terez/controller/auth/Token.dart';
-import 'package:terez/data/model/place_model.dart';
-import 'package:terez/data/model/team_model.dart';
-import 'package:terez/view/screens/Places/placeDetails.dart';
-import 'package:terez/view/screens/Teams/teamsDetails.dart';
+import 'package:JustTour/controller/auth/Token.dart';
+import 'package:JustTour/data/model/place_model.dart';
 
 class ShowSitesController extends GetxController {
-  
   Future<List<PlaceModel>?> getSites() async {
     try {
       print(
@@ -39,45 +35,43 @@ class ShowSitesController extends GetxController {
 
   //============ Get Site Details =============//
 
+  // Future<PlaceModel?> userGetSiteDetails(int siteId) async {
 
-  Future<PlaceModel?> userGetSiteDetails(int siteId) async {
+  //   var url = Uri.parse(API.userGetSite + siteId.toString());
+  //   final response = await http.get(
+  //     url,
+  //     headers: <String, String>{
+  //       'Content-Type': 'application/json; charset=UTF-8',
+  //       'Authorization':
+  //           'Bearer ${Get.find<GlobalStateController>().getToken()}'
+  //     },
+  //   );
+  //   print(url);
+  //   if (response.statusCode == 200) {
+  //     print(response.statusCode);
+  //     // If the server returns a 200 OK response, parse the JSON.
 
-    var url = Uri.parse(API.userGetSite + siteId.toString());
-    final response = await http.get(
-      url,
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization':
-            'Bearer ${Get.find<GlobalStateController>().getToken()}'
-      },
-    );
-    print(url);
-    if (response.statusCode == 200) {
-      print(response.statusCode);
-      // If the server returns a 200 OK response, parse the JSON.
+  //     Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+  //    // bool isFollowed = jsonResponse['isFollowed'];
 
-      Map<String, dynamic> jsonResponse = jsonDecode(response.body);
-     // bool isFollowed = jsonResponse['isFollowed'];
-      
-      print(jsonResponse['status']);
-      print(jsonResponse['message']);
-      print(jsonResponse['data']);
-      print(jsonResponse['data']['SiteName']);
-      Map<String, dynamic> siteData = jsonResponse['data'];
-      PlaceModel site = PlaceModel.fromJson(siteData);
-      return site;
-    } else {
-      print(response.statusCode);
-      
-      throw Exception('Failed to load site data');
-    }
-    
-  }
+  //     print(jsonResponse['status']);
+  //     print(jsonResponse['message']);
+  //     print(jsonResponse['data']);
+  //     print(jsonResponse['data']['Location']);
+  //     Map<String, dynamic> siteData = jsonResponse['data'];
+  //     PlaceModel site = PlaceModel.fromJson(siteData);
+  //     return site;
+  //   } else {
+  //     print(response.statusCode);
 
+  //     throw Exception('Failed to load site data');
+  //   }
 
-   /////////////////////////  For TEAM ////////////////////////////////////
-   
-    Future<List<PlaceModel>?> teamgetSites() async {
+  // }
+
+  //  /////////////////////////  For TEAM ////////////////////////////////////
+
+  Future<List<PlaceModel>?> teamgetSites() async {
     try {
       print(
           '===========================================================in get');
@@ -104,11 +98,9 @@ class ShowSitesController extends GetxController {
     }
   }
 
-
 /////////////////// Get Sites TEAM ////////////////////////
 
   Future<PlaceModel?> teamGetSiteDetails(int siteId) async {
-
     var url = Uri.parse(API.teamGetSite + siteId.toString());
     final response = await http.get(
       url,
@@ -124,8 +116,8 @@ class ShowSitesController extends GetxController {
       // If the server returns a 200 OK response, parse the JSON.
 
       Map<String, dynamic> jsonResponse = jsonDecode(response.body);
-     // bool isFollowed = jsonResponse['isFollowed'];
-      
+      // bool isFollowed = jsonResponse['isFollowed'];
+
       print(jsonResponse['status']);
       print(jsonResponse['message']);
       print(jsonResponse['data']);
@@ -136,9 +128,8 @@ class ShowSitesController extends GetxController {
       return site;
     } else {
       print(response.statusCode);
-      
+
       throw Exception('Failed to load site data');
     }
-    
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:terez/core/constant/appColors.dart';
+import 'package:JustTour/core/constant/appColors.dart';
 
 class DescriptionText extends StatelessWidget {
   final String? description;
@@ -28,7 +28,7 @@ class DescriptionText extends StatelessWidget {
                   const TextStyle(color: AppColors.blackCurrant, fontSize: 14),
             ),
             const SizedBox(
-              height: 30,
+              height: 0,
             )
           ],
         ),

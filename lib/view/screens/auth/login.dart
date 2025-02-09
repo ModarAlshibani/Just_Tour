@@ -3,12 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:terez/controller/auth/login_controller.dart';
-import 'package:terez/core/constant/appColors.dart';
-import 'package:terez/core/constant/imageAssets.dart';
-import 'package:terez/core/functions/validInput.dart';
-import 'package:terez/view/widgets/auth/customTextFormField.dart';
-import 'package:terez/view/widgets/auth/loginButton.dart';
+import 'package:JustTour/controller/auth/login_controller.dart';
+import 'package:JustTour/core/constant/appColors.dart';
+import 'package:JustTour/core/constant/imageAssets.dart';
+import 'package:JustTour/core/functions/validInput.dart';
+import 'package:JustTour/view/widgets/auth/customTextFormField.dart';
+import 'package:JustTour/view/widgets/auth/loginButton.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});
@@ -55,7 +55,12 @@ class Login extends StatelessWidget {
                 decoration: const BoxDecoration(),
                 child: CustomTextFormField(
                   valid: (val) {
-                    return validInput(val!, 8, 100, "email",);
+                    return validInput(
+                      val!,
+                      8,
+                      100,
+                      "email",
+                    );
                   },
                   icon: Icon(Icons.email_outlined),
                   label: "LTF1".tr,

@@ -1,10 +1,12 @@
+import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:terez/core/constant/appColors.dart';
-import 'package:terez/utils.dart';
+import 'package:JustTour/core/constant/appColors.dart';
+import '../../../controller/Team Controllers/addTripController.dart';
 
 class AddTripPhoto extends StatefulWidget {
   const AddTripPhoto({super.key});
@@ -15,12 +17,14 @@ class AddTripPhoto extends StatefulWidget {
 
 class _AddTripPhotoState extends State<AddTripPhoto> {
   Uint8List? tripPhoto;
+  AddTripControllerImp controller = Get.find();
 
   void selectImage() async {
-    Uint8List img = await pickImage(ImageSource.gallery);
+    final ImagePicker _picker = ImagePicker();
+    XFile? img = await _picker.pickImage(source: ImageSource.gallery);
 
     setState(() {
-      tripPhoto = img;
+      if (img != null) controller.TripPhoto = File(img.path);
     });
   }
 

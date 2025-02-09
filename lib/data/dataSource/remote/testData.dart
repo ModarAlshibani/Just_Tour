@@ -1,4 +1,4 @@
-import 'package:terez/core/class/crud.dart';
+import 'package:JustTour/core/class/crud.dart';
 
 class TestData {
   Crud crud;

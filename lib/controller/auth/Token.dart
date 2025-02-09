@@ -21,11 +21,11 @@ class GlobalStateController extends GetxController {
     return tripIsReserved.value;
   }
 
-   void TeamIsFollowed(bool? newTeamIsFollowed) {
+  void setTeamIsFollowed(bool? newTeamIsFollowed) {
     teamIsFollowed.value = newTeamIsFollowed ?? false;
   }
 
-   bool getTeamIsFollowed() {
+  bool getTeamIsFollowed() {
     return teamIsFollowed.value;
   }
 }

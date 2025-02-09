@@ -1,64 +1,59 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:JustTour/controller/Team%20Controllers/showFollowersController.dart';
+import 'package:JustTour/controller/Team%20Controllers/showCountestantsController.dart';
 import 'package:JustTour/core/constant/appColors.dart';
 import 'package:JustTour/data/model/userModel.dart';
-import 'package:JustTour/view/screens/Teams/followingController.dart';
 
-class FollowersList extends StatefulWidget {
+class CountestantsScreen extends StatefulWidget {
+  final int? id;
+
+  const CountestantsScreen({super.key, this.id});
+
   @override
-  State<FollowersList> createState() => _FollowersListState();
+  State<CountestantsScreen> createState() => _CountestantsScreenState();
 }
 
 late Future<List<User>?> users;
 
-@override
-void initState() {
-  users = ShowFollowersController().getFollowersList();
-}
-
-class _FollowersListState extends State<FollowersList> {
+class _CountestantsScreenState extends State<CountestantsScreen> {
   @override
+  void initState() {
+    users = CountestantsController().getCountestants(widget.id);
+  }
+
   Widget build(BuildContext context) {
-    users = ShowFollowersController().getFollowersList();
-    return WillPopScope(
-      onWillPop: () async {
-        Navigator.of(context).pushReplacementNamed('/teamNav');
-        return false;
-      },
-      child: Scaffold(
+    users = CountestantsController().getCountestants(widget.id);
+
+    return Scaffold(
         backgroundColor: AppColors.grey,
-        body: Column(
+        body: Stack(
           children: [
             Container(
               width: double.infinity,
-              height: 150,
-              decoration: BoxDecoration(
-                color: AppColors.midnightGreen,
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(50),
-                    bottomRight: Radius.circular(50)),
-              ),
+              height: double.infinity,
+              color: AppColors.midnightGreen,
               child: Padding(
-                padding: const EdgeInsets.only(top: 60, left: 50),
+                padding: const EdgeInsets.only(
+                  top: 60,
+                  left: 30,
+                ),
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     IconButton(
-                        onPressed: () {
-                          Get.back();
-                        },
+                        onPressed: () => Get.back(),
                         icon: Icon(
                           Icons.arrow_back_ios,
-                          color: AppColors.rumSwizzle,
+                          color: AppColors.grey,
                         )),
-                    SizedBox(
-                      width: 40,
-                    ),
-                    Text(
-                      "My Followers",
-                      style: TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold,
+                    Padding(
+                      padding: const EdgeInsets.only(top: 12),
+                      child: Text(
+                        "Countestants",
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayLarge
+                            ?.copyWith(fontSize: 20),
                       ),
                     ),
                   ],
@@ -66,11 +61,17 @@ class _FollowersListState extends State<FollowersList> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(6.0),
+              padding: const EdgeInsets.only(top: 120),
               child: Container(
                 width: double.infinity,
-                height: 500,
-                color: AppColors.grey,
+                height: double.infinity,
+                decoration: BoxDecoration(
+                  color: AppColors.whiteSmoke,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
+                  ),
+                ),
                 child: FutureBuilder(
                     future: users,
                     builder: (context, consInfo) {
@@ -83,23 +84,21 @@ class _FollowersListState extends State<FollowersList> {
                       }
                     }),
               ),
-            )
+            ),
           ],
-        ),
-      ),
-    );
+        ));
   }
 }
 
 Widget CountestantsWidget(AsyncSnapshot<List<User>?> consInfo) =>
     ListView.builder(
-      padding: EdgeInsets.only(top: 10, left: 10, right: 10),
+      padding: EdgeInsets.only(top: 40, left: 10, right: 10),
       scrollDirection: Axis.vertical,
       itemCount: consInfo.data?.length ?? 0,
       itemBuilder: (BuildContext context, int index) {
         User user = consInfo.data![index];
+
         return Container(
-          margin: EdgeInsets.only(bottom: 10),
           height: 100,
           width: 150,
           decoration: BoxDecoration(

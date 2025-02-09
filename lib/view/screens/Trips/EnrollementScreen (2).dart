@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:terez/controller/Trips%20Controller/joinTripController%20(2).dart';
-import 'package:terez/core/constant/appColors.dart';
-import 'package:terez/view/widgets/Trips/enrollement/EnrolllementTextField%20(2).dart';
+import 'package:JustTour/controller/Trips%20Controller/joinTripController%20(2).dart';
+import 'package:JustTour/core/constant/appColors.dart';
+import 'package:JustTour/view/widgets/Trips/enrollement/EnrolllementTextField%20(2).dart';
 
 class EnrollementScreen extends StatefulWidget {
   final int? id;
@@ -77,6 +77,7 @@ class _EnrollementScreenState extends State<EnrollementScreen> {
             ),
             ElevatedButton(
                 onPressed: () {
+                  print("${widget.id}");
                   controller.reserve(widget.id!);
                 },
                 child: Container(

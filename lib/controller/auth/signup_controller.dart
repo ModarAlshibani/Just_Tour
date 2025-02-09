@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:terez/APIs.dart';
-import 'package:terez/controller/auth/Token.dart';
+import 'package:JustTour/APIs.dart';
+import 'package:JustTour/controller/auth/Token.dart';
 
 abstract class SignupController extends GetxController {
   SignUp1();

@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:terez/core/constant/appColors.dart';
+import 'package:JustTour/core/constant/appColors.dart';
 
 class CategorieName extends StatelessWidget {
   final String catName;

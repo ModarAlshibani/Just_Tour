@@ -1,15 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:terez/APIs.dart';
+import 'package:JustTour/APIs.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:terez/controller/auth/Token.dart';
-import 'package:terez/view/screens/TeamUI/teamNavbar.dart';
-import 'package:terez/view/screens/auth/login.dart';
-import 'package:terez/view/screens/navbar.dart';
+import 'package:JustTour/controller/auth/Token.dart';
+import 'package:JustTour/view/screens/TeamUI/teamNavbar.dart';
+import 'package:JustTour/view/screens/navbar.dart';
 
 abstract class LoginController extends GetxController {
   login();
@@ -93,43 +91,43 @@ class LoginControllerImp extends LoginController {
     }
 
     try {
-    final response = await http.post(
-      Uri.parse(API.login),
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json"
-      },
-      body: jsonEncode(body),
-    );
-    final jsonResponse = jsonDecode(response.body);
+      final response = await http.post(
+        Uri.parse(API.login),
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        body: jsonEncode(body),
+      );
+      final jsonResponse = jsonDecode(response.body);
 
-    if (response.statusCode == 200 && jsonResponse["status"] == true) {
-      print("Login successful");
-      
-      String? token = jsonResponse['token'];
-      print(token);
+      if (response.statusCode == 200 && jsonResponse["status"] == true) {
+        print("Login successful");
 
-      // Save login status and token to Shared Preferences
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setBool('isLoggedIn', true);
-      await prefs.setString('token', token!);
+        String? token = jsonResponse['token'];
+        print(token);
 
-      // Update global state or navigate as needed
-      Get.find<GlobalStateController>().setToken(token);
-      print("token after Login setted successfully");
-      print(Get.find<GlobalStateController>().getToken());
+        // Save login status and token to Shared Preferences
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setBool('isLoggedIn', true);
+        await prefs.setString('token', token!);
 
-      if (jsonResponse["isUser"] == true) {
-        Get.to(Navbar());
+        // Update global state or navigate as needed
+        Get.find<GlobalStateController>().setToken(token);
+        print("token after Login setted successfully");
+        print(Get.find<GlobalStateController>().getToken());
+
+        if (jsonResponse["isUser"] == true) {
+          Get.to(Navbar());
+        } else {
+          Get.to(TeamNavbar());
+        }
       } else {
-        Get.to(TeamNavbar());
+        // Handle failure...
       }
-    } else {
-      // Handle failure...
+    } catch (error) {
+      print("Error during Login: $error");
     }
-  } catch (error) {
-    print("Error during Login: $error");
-  }
   }
 
   @override
@@ -157,28 +155,28 @@ class LoginControllerImp extends LoginController {
   }
 
   Future<void> checkLoginStatus() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
-  if (isLoggedIn) {
-    String? token = prefs.getString('token');
-    Get.find<GlobalStateController>().setToken(token);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+    if (isLoggedIn) {
+      String? token = prefs.getString('token');
+      Get.find<GlobalStateController>().setToken(token);
 
-  /////////////////////////// for the route when HotRestart ///////////////////////////
-     final response = await http.get(
-      Uri.parse(API.login),
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json"
-      },
-    );
-    final jsonResponse = jsonDecode(response.body);
-    if (jsonResponse["isUser"] == true) {
+      /////////////////////////// for the route when HotRestart ///////////////////////////
+      final response = await http.get(
+        Uri.parse(API.login),
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+      );
+      final jsonResponse = jsonDecode(response.body);
+      if (jsonResponse["isUser"] == true) {
         Get.to(Navbar());
       } else {
         Get.to(TeamNavbar());
       }
+    }
   }
-}
 
   @override
   void dispose() {
@@ -186,18 +184,16 @@ class LoginControllerImp extends LoginController {
     password.dispose();
     super.dispose();
   }
-  
+
   Future<void> logout() async {
     print("object");
-  // Clear the saved token and login status from SharedPreferences
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  await prefs.remove('token');
-  await prefs.remove('isLoggedIn');
+    // Clear the saved token and login status from SharedPreferences
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove('token');
+    await prefs.remove('isLoggedIn');
 
-  // Navigate back to the login screen or another appropriate screen
-  SystemNavigator.pop(); // Replace LoginScreen() with your actual login screen widget
-}
-
-
-
+    // Navigate back to the login screen or another appropriate screen
+    SystemNavigator
+        .pop(); // Replace LoginScreen() with your actual login screen widget
+  }
 }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:terez/controller/Trips%20Controller/showTripsController.dart';
-import 'package:terez/core/constant/appColors.dart';
-import 'package:terez/data/model/team_model.dart';
-import 'package:terez/data/model/trip_model.dart';
-import 'package:terez/view/screens/Trips/tripDetailsScreenUser%20(2).dart';
+import 'package:JustTour/controller/Trips%20Controller/showTripsController.dart';
+import 'package:JustTour/core/constant/appColors.dart';
+import 'package:JustTour/data/model/team_model.dart';
+import 'package:JustTour/data/model/trip_model.dart';
+import 'package:JustTour/view/screens/Trips/tripDetailsScreenUser%20(2).dart';
 
 class ExcursionsTrips extends StatefulWidget {
   const ExcursionsTrips({super.key});
@@ -115,7 +115,7 @@ Widget getCategorieTrips(AsyncSnapshot<List<TripModel>?> tripInfo) =>
 
       itemBuilder: (BuildContext context, int index) {
         TripModel trip = tripInfo.data![index];
-        String? pic = trip.TripPhoto;
+
         return InkWell(
           onTap: () {
             //   TripController().userGetTripDetails(trip.id);
@@ -141,7 +141,7 @@ Widget getCategorieTrips(AsyncSnapshot<List<TripModel>?> tripInfo) =>
                   height: 200,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: NetworkImage(pic!), fit: BoxFit.cover),
+                          image: NetworkImage('sss'), fit: BoxFit.cover),
                       borderRadius: BorderRadius.circular(10)),
                 )),
                 Positioned.fill(

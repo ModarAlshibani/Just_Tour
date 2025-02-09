@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:terez/core/constant/appColors.dart';
+import 'package:JustTour/core/constant/appColors.dart';
 
 class backButton extends StatelessWidget {
   const backButton({super.key});

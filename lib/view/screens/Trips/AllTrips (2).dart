@@ -2,19 +2,19 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:terez/controller/Trips%20Controller/showTripsController.dart';
-import 'package:terez/core/constant/appColors.dart';
-import 'package:terez/core/constant/imageAssets.dart';
-import 'package:terez/data/model/trip_model.dart';
-import 'package:terez/view/screens/Trips/Categories%20Trips/AdventureTrips.dart';
-import 'package:terez/view/screens/Trips/Categories%20Trips/CulturalTrips.dart';
-import 'package:terez/view/screens/Trips/Categories%20Trips/ExcursionsTrips.dart';
-import 'package:terez/view/screens/Trips/Categories%20Trips/LeisureTrips.dart';
-import 'package:terez/view/screens/Trips/Categories%20Trips/TourTrips.dart';
-import 'package:terez/view/screens/Trips/tripDetailsScreenUser%20(2).dart';
-import 'package:terez/view/screens/navbar.dart';
-import 'package:terez/view/widgets/Trips/tripOutsideVertical.dart';
-import 'package:terez/view/widgets/Trips/tripsCatTitle.dart';
+import 'package:JustTour/controller/Trips%20Controller/showTripsController.dart';
+import 'package:JustTour/core/constant/appColors.dart';
+import 'package:JustTour/core/constant/imageAssets.dart';
+import 'package:JustTour/data/model/trip_model.dart';
+import 'package:JustTour/view/screens/Trips/Categories%20Trips/AdventureTrips.dart';
+import 'package:JustTour/view/screens/Trips/Categories%20Trips/CulturalTrips.dart';
+import 'package:JustTour/view/screens/Trips/Categories%20Trips/ExcursionsTrips.dart';
+import 'package:JustTour/view/screens/Trips/Categories%20Trips/LeisureTrips.dart';
+import 'package:JustTour/view/screens/Trips/Categories%20Trips/TourTrips.dart';
+import 'package:JustTour/view/screens/Trips/tripDetailsScreenUser%20(2).dart';
+import 'package:JustTour/view/screens/navbar.dart';
+import 'package:JustTour/view/widgets/Trips/tripOutsideVertical.dart';
+import 'package:JustTour/view/widgets/Trips/tripsCatTitle.dart';
 
 class AllTrips extends StatelessWidget {
   const AllTrips({super.key});
@@ -36,237 +36,275 @@ class AllTrips extends StatelessWidget {
         body: RefreshIndicator(
           onRefresh: () async {
             print("in refressssssssssssssssssssssssssssssssssssh");
-      
+
             // Get.to(Navbar());
             await Future.delayed(Duration(seconds: 2));
           },
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 40,
+          child: Stack(
+            children: [
+              Container(
+                width: double.infinity,
+                height: double.infinity,
+                color: AppColors.midnightGreen,
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    top: 60,
+                    left: 30,
+                  ),
+                  child: Text(
+                    "Trips",
+                    style: Theme.of(context).textTheme.displayLarge,
+                  ),
                 ),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 17),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const CategorieName(catName: "Tour Trips:"),
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10)),
-                        child: MaterialButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                          color: AppColors.midnightGreen,
-                          onPressed: () => Get.to(TourTrips()),
-                          child: Text(
-                            "See More",
-                            style: TextStyle(color: Colors.white),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 120),
+                child: Container(
+                  width: double.infinity,
+                  height: double.infinity,
+                  decoration: BoxDecoration(
+                    color: AppColors.whiteSmoke,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30),
+                    ),
+                  ),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                          height: 40,
+                        ),
+                        Container(
+                          margin: EdgeInsets.symmetric(horizontal: 17),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const CategorieName(catName: "Tour Trips:"),
+                              Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: MaterialButton(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 8),
+                                  color: AppColors.midnightGreen,
+                                  onPressed: () => Get.to(TourTrips()),
+                                  child: Text(
+                                    "See More",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              )
+                            ],
                           ),
                         ),
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  height: 270,
-                  child: FutureBuilder<List<TripModel>?>(
-                    future: tourTrips,
-                    builder: (context, tripInfo) {
-                      if (tripInfo.hasData) {
-                        return getCategorieTrips(tripInfo);
-                      } else if (tripInfo.hasError) {
-                        return Text('${tripInfo.error}');
-                      } else {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-                    },
-                  ),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 17),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const CategorieName(catName: "Cultural Trips:"),
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10)),
-                        child: MaterialButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                          color: AppColors.midnightGreen,
-                          onPressed: () => Get.to(CulturalTrips()),
-                          child: Text(
-                            "See More",
-                            style: TextStyle(color: Colors.white),
+                        SizedBox(
+                          width: double.infinity,
+                          height: 270,
+                          child: FutureBuilder<List<TripModel>?>(
+                            future: tourTrips,
+                            builder: (context, tripInfo) {
+                              if (tripInfo.hasData) {
+                                return getCategorieTrips(tripInfo);
+                              } else if (tripInfo.hasError) {
+                                return Text('${tripInfo.error}');
+                              } else {
+                                return const Center(
+                                    child: CircularProgressIndicator());
+                              }
+                            },
                           ),
                         ),
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  height: 270,
-                  child: FutureBuilder<List<TripModel>?>(
-                    future: culturalTrips,
-                    builder: (context, tripInfo) {
-                      if (tripInfo.hasData) {
-                        return getCategorieTrips(tripInfo);
-                      } else if (tripInfo.hasError) {
-                        return Text(' ${tripInfo.error}');
-                      } else {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-                    },
-                  ),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 17),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const CategorieName(catName: "Leisure Trips:"),
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10)),
-                        child: MaterialButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                          color: AppColors.midnightGreen,
-                          onPressed: () => Get.to(LeisureTrips()),
-                          child: Text(
-                            "See More",
-                            style: TextStyle(color: Colors.white),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Container(
+                          margin: EdgeInsets.symmetric(horizontal: 17),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const CategorieName(catName: "Cultural Trips:"),
+                              Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: MaterialButton(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 8),
+                                  color: AppColors.midnightGreen,
+                                  onPressed: () => Get.to(CulturalTrips()),
+                                  child: Text(
+                                    "See More",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              )
+                            ],
                           ),
                         ),
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  height: 270,
-                  child: FutureBuilder<List<TripModel>?>(
-                    future: leisureTrips,
-                    builder: (context, tripInfo) {
-                      if (tripInfo.hasData) {
-                        return getCategorieTrips(tripInfo);
-                      } else if (tripInfo.hasError) {
-                        return Text(' ${tripInfo.error}');
-                      } else {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-                    },
-                  ),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 17),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const CategorieName(catName: "Adventure Trips:"),
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10)),
-                        child: MaterialButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                          color: AppColors.midnightGreen,
-                          onPressed: () => Get.to(AdventureTrips()),
-                          child: Text(
-                            "See More",
-                            style: TextStyle(color: Colors.white),
+                        SizedBox(
+                          width: double.infinity,
+                          height: 270,
+                          child: FutureBuilder<List<TripModel>?>(
+                            future: culturalTrips,
+                            builder: (context, tripInfo) {
+                              if (tripInfo.hasData) {
+                                return getCategorieTrips(tripInfo);
+                              } else if (tripInfo.hasError) {
+                                return Text(' ${tripInfo.error}');
+                              } else {
+                                return const Center(
+                                    child: CircularProgressIndicator());
+                              }
+                            },
                           ),
                         ),
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  height: 270,
-                  child: FutureBuilder<List<TripModel>?>(
-                    future: adventureTrips,
-                    builder: (context, tripInfo) {
-                      if (tripInfo.hasData) {
-                        return getCategorieTrips(tripInfo);
-                      } else if (tripInfo.hasError) {
-                        return Text('${tripInfo.error}');
-                      } else {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-                    },
-                  ),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 17),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const CategorieName(catName: "Excursions Trips:"),
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10)),
-                        child: MaterialButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                          color: AppColors.midnightGreen,
-                          onPressed: () => Get.to(ExcursionsTrips()),
-                          child: Text(
-                            "See More",
-                            style: TextStyle(color: Colors.white),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Container(
+                          margin: EdgeInsets.symmetric(horizontal: 17),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const CategorieName(catName: "Leisure Trips:"),
+                              Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: MaterialButton(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 8),
+                                  color: AppColors.midnightGreen,
+                                  onPressed: () => Get.to(LeisureTrips()),
+                                  child: Text(
+                                    "See More",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              )
+                            ],
                           ),
                         ),
-                      )
-                    ],
+                        SizedBox(
+                          width: double.infinity,
+                          height: 270,
+                          child: FutureBuilder<List<TripModel>?>(
+                            future: leisureTrips,
+                            builder: (context, tripInfo) {
+                              if (tripInfo.hasData) {
+                                return getCategorieTrips(tripInfo);
+                              } else if (tripInfo.hasError) {
+                                return Text(' ${tripInfo.error}');
+                              } else {
+                                return const Center(
+                                    child: CircularProgressIndicator());
+                              }
+                            },
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Container(
+                          margin: EdgeInsets.symmetric(horizontal: 17),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const CategorieName(catName: "Adventure Trips:"),
+                              Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: MaterialButton(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 8),
+                                  color: AppColors.midnightGreen,
+                                  onPressed: () => Get.to(AdventureTrips()),
+                                  child: Text(
+                                    "See More",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          width: double.infinity,
+                          height: 270,
+                          child: FutureBuilder<List<TripModel>?>(
+                            future: adventureTrips,
+                            builder: (context, tripInfo) {
+                              if (tripInfo.hasData) {
+                                return getCategorieTrips(tripInfo);
+                              } else if (tripInfo.hasError) {
+                                return Text('${tripInfo.error}');
+                              } else {
+                                return const Center(
+                                    child: CircularProgressIndicator());
+                              }
+                            },
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        Container(
+                          margin: EdgeInsets.symmetric(horizontal: 17),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const CategorieName(catName: "Excursions Trips:"),
+                              Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: MaterialButton(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 8),
+                                  color: AppColors.midnightGreen,
+                                  onPressed: () => Get.to(ExcursionsTrips()),
+                                  child: Text(
+                                    "See More",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          width: double.infinity,
+                          height: 270,
+                          child: FutureBuilder<List<TripModel>?>(
+                            future: excursionsTrips,
+                            builder: (context, tripInfo) {
+                              if (tripInfo.hasData) {
+                                return getCategorieTrips(tripInfo);
+                              } else if (tripInfo.hasError) {
+                                return Text(' ${tripInfo.error}');
+                              } else {
+                                return const Center(
+                                    child: CircularProgressIndicator());
+                              }
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                SizedBox(
-                  width: double.infinity,
-                  height: 270,
-                  child: FutureBuilder<List<TripModel>?>(
-                    future: excursionsTrips,
-                    builder: (context, tripInfo) {
-                      if (tripInfo.hasData) {
-                        return getCategorieTrips(tripInfo);
-                      } else if (tripInfo.hasError) {
-                        return Text(' ${tripInfo.error}');
-                      } else {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-                    },
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
@@ -297,7 +335,7 @@ Widget getCategorieTrips(AsyncSnapshot<List<TripModel>?> tripInfo) =>
 
       itemBuilder: (BuildContext context, int index) {
         TripModel trip = tripInfo.data![index];
-        String? pic = trip.TripPhoto;
+
         return InkWell(
           onTap: () {
             //   TripController().userGetTripDetails(trip.id);
@@ -323,7 +361,7 @@ Widget getCategorieTrips(AsyncSnapshot<List<TripModel>?> tripInfo) =>
                   height: 220,
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: NetworkImage(pic!), fit: BoxFit.fill),
+                          image: NetworkImage('sss'), fit: BoxFit.fill),
                       borderRadius: BorderRadius.circular(10)),
                 )),
                 Positioned.fill(

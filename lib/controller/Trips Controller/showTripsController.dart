@@ -2,11 +2,10 @@ import 'dart:convert';
 import 'dart:ffi';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
-import 'package:terez/APIs.dart';
-import 'package:terez/controller/auth/Token.dart';
-import 'package:terez/data/model/trip_model.dart';
-import 'package:terez/view/screens/Trips/tripDetailsScreenUser%20(2).dart';
-
+import 'package:JustTour/APIs.dart';
+import 'package:JustTour/controller/auth/Token.dart';
+import 'package:JustTour/data/model/trip_model.dart';
+import 'package:JustTour/view/screens/Trips/tripDetailsScreenUser%20(2).dart';
 
 class TripController extends GetxController {
   Future<List<TripModel>?> getTrips(String category) async {
@@ -108,6 +107,34 @@ class TripController extends GetxController {
       );
       print(url);
       print('trip');
+      print(response.body);
+      if (response.statusCode == 200) {
+        print('Response body: ${response.body}');
+        List<TripModel> _model = TripListFromJson(response.body);
+        print('Parsed model count: ${_model.length}');
+        return _model;
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+///////////////// Show Team Trips For User ///////////////////
+
+  Future<List<TripModel>?> userGetTeamTrips(int? teamId) async {
+    try {
+      print('in get');
+      var url = Uri.parse(API.teamTripsForUser + teamId.toString());
+      var response = await http.get(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization':
+              'Bearer ${Get.find<GlobalStateController>().getToken()}'
+        },
+      );
+      print(url);
+      print('team trips');
       print(response.body);
       if (response.statusCode == 200) {
         print('Response body: ${response.body}');

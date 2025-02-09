@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:terez/controller/onBoarding_Controller.dart';
-import 'package:terez/core/constant/appColors.dart';
-import 'package:terez/view/widgets/onBoardingWidgets/customButton.dart';
-import 'package:terez/view/widgets/onBoardingWidgets/dots.dart';
-import 'package:terez/view/widgets/onBoardingWidgets/sliderOnBoarding.dart';
+import 'package:JustTour/controller/onBoarding_Controller.dart';
+import 'package:JustTour/core/constant/appColors.dart';
+import 'package:JustTour/view/widgets/onBoardingWidgets/customButton.dart';
+import 'package:JustTour/view/widgets/onBoardingWidgets/dots.dart';
+import 'package:JustTour/view/widgets/onBoardingWidgets/sliderOnBoarding.dart';
 
 // ignore: camel_case_types
 class OnBoarding extends StatelessWidget {

@@ -1,52 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:JustTour/controller/Trips%20Controller/joinTripController%20(2).dart';
-import 'package:JustTour/controller/auth/Token.dart';
+import 'package:JustTour/controller/Trips%20Controller/showTeamMyTripsController.dart';
 import 'package:JustTour/core/constant/appColors.dart';
+
 import 'package:JustTour/data/model/trip_model.dart';
-import 'package:JustTour/view/screens/Trips/EnrollementScreen%20(2).dart';
+import 'package:JustTour/view/screens/TeamUI/countestantsScreen.dart';
 import 'package:JustTour/view/widgets/Trips/tripDetails/Description.dart';
 import 'package:JustTour/view/widgets/Trips/tripDetails/mainInfoRow.dart';
 import 'package:JustTour/view/widgets/Trips/tripDetails/tripDetailsPic.dart';
-import '../../../controller/Trips Controller/showTripsController.dart';
 
-class TripDetailsScreenUser extends StatefulWidget {
+class MyTripDetails extends StatefulWidget {
   final int? id;
 
-  const TripDetailsScreenUser({super.key, this.id});
+  const MyTripDetails({super.key, this.id});
 
   @override
-  State<TripDetailsScreenUser> createState() => _TripDetailsScreenUserState();
+  State<MyTripDetails> createState() => _MyTripDetails();
 }
 
 late Future<TripModel?> trip;
 
-class _TripDetailsScreenUserState extends State<TripDetailsScreenUser> {
+class _MyTripDetails extends State<MyTripDetails> {
   @override
   void initState() {
-    trip = TripController().userGetTripDetails(widget.id);
-    // isReserved = TripController().ReservationStatus(widget.id);
+    trip = TeamMyTripsController().teamGetTripDetails(widget.id);
   }
 
   @override
   Widget build(BuildContext context) {
     JoinTripControllerImp controller = Get.put(JoinTripControllerImp());
-    trip = TripController().userGetTripDetails(widget.id);
-    // isReserved = TripController().ReservationStatus(widget.id);
+    trip = TeamMyTripsController().teamGetTripDetails(widget.id);
 
-    print(
-        "================================================================================");
-    print(widget.id);
-    if (Get.find<GlobalStateController>().getTripIsReserved() == true) {
-      print('gettttttttttttttttttttttttttttttttttttttttttttttt true');
-    } else {
-      print('gettttttttttttttttttttttttttttttttttttttttttttttt false');
-    }
-
-    print(
-        "================================================================================");
     return Scaffold(
+        // backgroundColor: AppColors.grey,
         body: FutureBuilder<TripModel?>(
       future: trip,
       builder: (context, tripInfo) {
@@ -64,9 +51,7 @@ class _TripDetailsScreenUserState extends State<TripDetailsScreenUser> {
 
 Widget getTripDetails(AsyncSnapshot<TripModel?> tripInfo) => Container(
       height: double.infinity,
-      color: Get.find<GlobalStateController>().getTripIsReserved()
-          ? AppColors.orange
-          : AppColors.grey,
+      color: AppColors.grey,
       child: Stack(
         children: [
           Container(
@@ -79,6 +64,7 @@ Widget getTripDetails(AsyncSnapshot<TripModel?> tripInfo) => Container(
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TripDetailsPic(
                       coverPic: tripInfo.data?.TripPhoto,
@@ -97,6 +83,33 @@ Widget getTripDetails(AsyncSnapshot<TripModel?> tripInfo) => Container(
                     height: 20,
                   ),
                   DescriptionText(description: tripInfo.data?.Description),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 30,
+                      ),
+                      Text(
+                        "Total price:",
+                        style: TextStyle(
+                            color: AppColors.blackCurrant,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        tripInfo.data!.Cost.toString() + "S.p",
+                        style: TextStyle(
+                            color: AppColors.blackCurrant.withOpacity(0.6),
+                            fontSize: 15,
+                            fontWeight: FontWeight.w800),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
                 ],
               ),
             ),
@@ -104,9 +117,7 @@ Widget getTripDetails(AsyncSnapshot<TripModel?> tripInfo) => Container(
           Positioned(
               bottom: 0,
               child: Container(
-                color: Get.find<GlobalStateController>().getTripIsReserved()
-                    ? AppColors.orange
-                    : AppColors.grey,
+                color: AppColors.grey,
                 width: 400,
                 height: 100,
                 child: Row(
@@ -116,30 +127,12 @@ Widget getTripDetails(AsyncSnapshot<TripModel?> tripInfo) => Container(
                       width: 0,
                     ),
                     Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            Get.find<GlobalStateController>()
-                                    .getTripIsReserved()
-                                ? "Trip Reserved"
-                                : "Total price",
-                            style: TextStyle(
-                                color: AppColors.blackCurrant.withOpacity(0.6),
-                                fontSize: 15),
-                          ),
-                          Text(
-                            Get.find<GlobalStateController>()
-                                    .getTripIsReserved()
-                                ? "Cancel Reservation"
-                                : tripInfo.data!.Cost.toString() + "S.p",
-                            style: TextStyle(
-                                color: AppColors.blackCurrant,
-                                fontSize: 22,
-                                fontWeight: FontWeight.w800),
-                          ),
-                        ],
+                      child: Text(
+                        "Display Countestants :",
+                        style: TextStyle(
+                            color: AppColors.blackCurrant,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600),
                       ),
                     ),
                     // SizedBox(
@@ -147,21 +140,11 @@ Widget getTripDetails(AsyncSnapshot<TripModel?> tripInfo) => Container(
                     // ),
                     InkWell(
                       onTap: () {
-                        if (Get.find<GlobalStateController>()
-                                .getTripIsReserved() ==
-                            false) {
-                          Get.to(
-                              EnrollementScreen(
-                                id: tripInfo.data!.id,
-                              ),
-                              arguments: tripInfo.data!.id);
-                        } else if (Get.find<GlobalStateController>()
-                                .getTripIsReserved() ==
-                            true) {
-                          JoinTripControllerImp()
-                              .CancelReservation(tripInfo.data!.id);
-                          print("Cancelllllllllllllllllllll TRip");
-                        }
+                        Get.to(
+                            CountestantsScreen(
+                              id: tripInfo.data!.id,
+                            ),
+                            arguments: tripInfo.data!.id);
                       },
                       child: Container(
                         width: 80,
@@ -170,14 +153,15 @@ Widget getTripDetails(AsyncSnapshot<TripModel?> tripInfo) => Container(
                             color: AppColors.blackCurrant,
                             borderRadius: BorderRadius.circular(50)),
                         child: Icon(
-                          Get.find<GlobalStateController>().getTripIsReserved()
-                              ? Icons.cancel_outlined
-                              : Icons.arrow_forward_rounded,
+                          Icons.arrow_forward_rounded,
                           color: AppColors.whiteSmoke.withOpacity(0.8),
                           size: 60,
                         ),
                       ),
                     ),
+                    SizedBox(
+                      width: 0,
+                    )
                   ],
                 ),
               )),

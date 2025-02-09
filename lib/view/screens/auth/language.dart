@@ -1,10 +1,10 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:terez/core/constant/appColors.dart';
-import 'package:terez/core/constant/imageAssets.dart';
-import 'package:terez/core/localization/changeLocalController.dart';
-import 'package:terez/view/widgets/language/customLanguageButton.dart';
+import 'package:JustTour/core/constant/appColors.dart';
+import 'package:JustTour/core/constant/imageAssets.dart';
+import 'package:JustTour/core/localization/changeLocalController.dart';
+import 'package:JustTour/view/widgets/language/customLanguageButton.dart';
 
 class Language extends GetView<LocalController> {
   Language({super.key});

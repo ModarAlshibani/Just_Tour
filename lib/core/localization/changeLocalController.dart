@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:get/get.dart';
-import 'package:terez/core/services/services.dart';
+import 'package:JustTour/core/services/services.dart';
 
 class LocalController extends GetxController {
   Locale? language;

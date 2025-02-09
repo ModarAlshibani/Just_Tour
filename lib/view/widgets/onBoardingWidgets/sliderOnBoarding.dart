@@ -3,8 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:terez/controller/onBoarding_Controller.dart';
-import 'package:terez/data/dataSource/statics/static.dart';
+import 'package:JustTour/controller/onBoarding_Controller.dart';
+import 'package:JustTour/data/dataSource/statics/static.dart';
 
 class SliderOnBoarding extends GetView<OnBoardingControllerImp> {
   const SliderOnBoarding({super.key});

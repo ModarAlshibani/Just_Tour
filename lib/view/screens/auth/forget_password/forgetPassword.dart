@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:terez/controller/auth/Forgetpaswword_Controller/forgetPassword_controller.dart';
-import 'package:terez/core/constant/appColors.dart';
-import 'package:terez/view/widgets/auth/customTextFormField.dart';
+import 'package:JustTour/controller/auth/Forgetpaswword_Controller/forgetPassword_controller.dart';
+import 'package:JustTour/core/constant/appColors.dart';
+import 'package:JustTour/view/widgets/auth/customTextFormField.dart';
 
 class ForgetPassword extends StatelessWidget {
   const ForgetPassword({super.key});

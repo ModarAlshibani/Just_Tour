@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:terez/controller/onBoarding_Controller.dart';
-import 'package:terez/core/constant/appColors.dart';
+import 'package:JustTour/controller/onBoarding_Controller.dart';
+import 'package:JustTour/core/constant/appColors.dart';
 
 class customButtonOnBoarding extends GetView<OnBoardingControllerImp> {
   const customButtonOnBoarding({super.key});

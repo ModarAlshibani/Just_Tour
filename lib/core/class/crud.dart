@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
-import 'package:terez/core/class/statusRequest.dart';
-import 'package:terez/core/functions/checkInternet.dart';
+import 'package:JustTour/core/class/statusRequest.dart';
+import 'package:JustTour/core/functions/checkInternet.dart';
 import 'package:http/http.dart' as http;
 
 class Crud {

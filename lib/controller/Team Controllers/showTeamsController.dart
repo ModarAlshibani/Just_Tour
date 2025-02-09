@@ -1,10 +1,9 @@
 import 'package:get/get.dart';
-import 'package:terez/APIs.dart';
+import 'package:JustTour/APIs.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:terez/controller/auth/Token.dart';
-import 'package:terez/data/model/team_model.dart';
-import 'package:terez/view/screens/Teams/teamsDetails.dart';
+import 'package:JustTour/controller/auth/Token.dart';
+import 'package:JustTour/data/model/team_model.dart';
 
 class ShowTeamsController extends GetxController {
   Future<List<TeamModel>?> getTeams() async {
@@ -36,9 +35,7 @@ class ShowTeamsController extends GetxController {
 
   //============ Get Team Details =============//
 
-
   Future<TeamModel?> userGetTeamDetails(int? teamId) async {
-  
     var url = Uri.parse(API.userGetTeam + teamId.toString());
     final response = await http.get(
       url,
@@ -54,24 +51,25 @@ class ShowTeamsController extends GetxController {
       // If the server returns a 200 OK response, parse the JSON.
 
       Map<String, dynamic> jsonResponse = jsonDecode(response.body);
-     // bool isFollowed = jsonResponse['isFollowed'];
-      
+      // bool isFollowed = jsonResponse['isFollowed'];
+
       print(jsonResponse['status']);
       print(jsonResponse['message']);
       print(jsonResponse['data']);
       print("isFollowed:");
       print(jsonResponse['isFollowed']);
       print(jsonResponse['data']['TeamName']);
+
+      Get.find<GlobalStateController>()
+          .setTeamIsFollowed(jsonResponse['isFollowed']);
+
       Map<String, dynamic> teamData = jsonResponse['data'];
       TeamModel team = TeamModel.fromJson(teamData);
       return team;
     } else {
       print(response.statusCode);
-      
+
       throw Exception('Failed to load trip data');
     }
-    
   }
-   
-
 }

@@ -1,12 +1,12 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:terez/controller/auth/signup_controller.dart';
-import 'package:terez/core/constant/appColors.dart';
-import 'package:terez/core/constant/imageAssets.dart';
-import 'package:terez/core/functions/validInput.dart';
-import 'package:terez/view/widgets/auth/customTextFormField.dart';
-import 'package:terez/view/widgets/auth/loginButton.dart';
+import 'package:JustTour/controller/auth/signup_controller.dart';
+import 'package:JustTour/core/constant/appColors.dart';
+import 'package:JustTour/core/constant/imageAssets.dart';
+import 'package:JustTour/core/functions/validInput.dart';
+import 'package:JustTour/view/widgets/auth/customTextFormField.dart';
+import 'package:JustTour/view/widgets/auth/loginButton.dart';
 
 class SignUp1 extends StatelessWidget {
   const SignUp1({super.key});

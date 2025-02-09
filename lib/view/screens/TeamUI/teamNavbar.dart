@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:terez/core/constant/appColors.dart';
-import 'package:terez/view/screens/TeamUI/EditPtofile.dart';
-import 'package:terez/view/screens/TeamUI/FollowersList.dart';
-import 'package:terez/view/screens/TeamUI/Settings.dart';
-import 'package:terez/view/screens/TeamUI/TeamHomepage.dart';
+import 'package:JustTour/core/constant/appColors.dart';
+import 'package:JustTour/view/screens/TeamUI/EditPtofile.dart';
+import 'package:JustTour/view/screens/TeamUI/FollowersList.dart';
+import 'package:JustTour/view/screens/TeamUI/TeamHomepage.dart';
 
 class TeamNavbar extends StatefulWidget {
   @override
@@ -16,8 +15,7 @@ class _NavbarState extends State<TeamNavbar> {
   static List<Widget> widgetsList = <Widget>[
     TeamHomepage(),
     FollowersList(),
-    EditProfile(),
-    Settings()
+    EditProfile()
   ];
 
   @override
@@ -27,7 +25,6 @@ class _NavbarState extends State<TeamNavbar> {
         decoration: BoxDecoration(
           color: AppColors.whiteSmoke,
         ),
-        
         child: GNav(
             backgroundColor: AppColors.whiteSmoke,
             tabBackgroundColor: AppColors.midnightGreen,
@@ -56,11 +53,6 @@ class _NavbarState extends State<TeamNavbar> {
                 icon: Icons.account_box_outlined,
                 text: "Profile",
               ),
-              GButton(
-                icon: Icons.settings,
-                text: "Settings",
-              ),
-              
             ]),
       ),
       body: widgetsList.elementAt(_selectedIndex),

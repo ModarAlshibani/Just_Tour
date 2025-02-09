@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:terez/core/class/statusRequest.dart';
-import 'package:terez/core/functions/handlingData.dart';
-import 'package:terez/data/dataSource/remote/testData.dart';
+import 'package:JustTour/core/class/statusRequest.dart';
+import 'package:JustTour/core/functions/handlingData.dart';
+import 'package:JustTour/data/dataSource/remote/testData.dart';
 
 class TestController extends GetxController {
   TestData testData = TestData(Get.find());

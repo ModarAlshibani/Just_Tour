@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:JustTour/core/constant/appColors.dart';
 
-class FollowingListPicker extends StatefulWidget {
+class LogPicker extends StatefulWidget {
   final Function(bool) updateShow;
 
-  FollowingListPicker({required this.updateShow});
+  LogPicker({required this.updateShow});
 
   @override
-  State<FollowingListPicker> createState() => _FollowingListPickerState();
+  State<LogPicker> createState() => _LogPicker();
 }
 
-class _FollowingListPickerState extends State<FollowingListPicker> {
+class _LogPicker extends State<LogPicker> {
   Color Color1 = AppColors.whiteSmoke;
   Color Color2 = Color.fromARGB(255, 188, 188, 188);
 
-  void _teamsPressed() {
+  void _upComming() {
     setState(() {
       Color1 = AppColors.whiteSmoke;
       Color2 = Color.fromARGB(255, 188, 188, 188);
@@ -22,7 +22,7 @@ class _FollowingListPickerState extends State<FollowingListPicker> {
     });
   }
 
-  void _sitesPressed() {
+  void _isFinished() {
     setState(() {
       Color2 = AppColors.whiteSmoke;
       Color1 = Color.fromARGB(255, 188, 188, 188);
@@ -33,15 +33,15 @@ class _FollowingListPickerState extends State<FollowingListPicker> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         MaterialButton(
           onPressed: () {
-            _teamsPressed();
+            _upComming();
           },
           child: Container(
             height: 40,
-            width: 100,
+            width: 120,
             decoration: BoxDecoration(
                 color: Color1,
                 borderRadius: BorderRadius.only(
@@ -49,9 +49,9 @@ class _FollowingListPickerState extends State<FollowingListPicker> {
                     topRight: Radius.circular(10))),
             child: Center(
               child: Text(
-                "Teams",
+                "Upcomming trips",
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    fontSize: 15,
+                    fontSize: 12,
                     color: AppColors.midnightGreen,
                     fontWeight: FontWeight.w700),
               ),
@@ -59,15 +59,15 @@ class _FollowingListPickerState extends State<FollowingListPicker> {
           ),
         ),
         SizedBox(
-          width: 40,
+          width: 10,
         ),
         MaterialButton(
           onPressed: () {
-            _sitesPressed();
+            _isFinished();
           },
           child: Container(
             height: 40,
-            width: 100,
+            width: 120,
             decoration: BoxDecoration(
                 color: Color2,
                 borderRadius: BorderRadius.only(
@@ -75,9 +75,9 @@ class _FollowingListPickerState extends State<FollowingListPicker> {
                     topRight: Radius.circular(10))),
             child: Center(
               child: Text(
-                "Sites",
+                "Finished trips",
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    fontSize: 15,
+                    fontSize: 12,
                     color: AppColors.midnightGreen,
                     fontWeight: FontWeight.w700),
               ),

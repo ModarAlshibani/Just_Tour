@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:terez/controller/auth/Token.dart';
-import 'package:terez/core/constant/appColors.dart';
-import 'package:terez/view/screens/Trips/AllTrips%20(2).dart';
-import 'package:terez/view/screens/homePage/homepage.dart';
-import 'package:terez/view/screens/Places/placesScreen.dart';
-import 'package:terez/view/screens/Teams/teamsScreen.dart';
+import 'package:JustTour/controller/auth/Token.dart';
+import 'package:JustTour/core/constant/appColors.dart';
+import 'package:JustTour/view/screens/Trips/AllTrips%20(2).dart';
+import 'package:JustTour/view/screens/homePage/homepage.dart';
+import 'package:JustTour/view/screens/Places/placesScreen.dart';
+import 'package:JustTour/view/screens/Teams/teamsScreen.dart';
 
 class Navbar extends StatefulWidget {
   @override

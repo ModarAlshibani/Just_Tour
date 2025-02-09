@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:terez/core/constant/appColors.dart';
+import 'package:JustTour/core/constant/appColors.dart';
 
 class CustomLanguageButton extends StatelessWidget {
   final String text;
