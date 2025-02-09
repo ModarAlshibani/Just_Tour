@@ -121,7 +121,7 @@ class SignUp1 extends StatelessWidget {
                   left: 30,
                   right: 23,
                   child: AuthCustomButton(
-                    text: "Signin".tr,
+                    text: "SignUp".tr,
                     onPressed: () {
                       controller.SignUp1();
                     },

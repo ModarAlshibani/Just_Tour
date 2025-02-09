@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:terez/controller/auth/Token.dart';
 import 'package:terez/core/constant/appColors.dart';
+import 'package:terez/view/screens/Trips/AllTrips%20(2).dart';
 import 'package:terez/view/screens/homePage/homepage.dart';
 import 'package:terez/view/screens/Places/placesScreen.dart';
 import 'package:terez/view/screens/Teams/teamsScreen.dart';
-import 'package:terez/view/screens/Trips/tripsScreen.dart';
 
 class Navbar extends StatefulWidget {
   @override
@@ -17,7 +17,7 @@ class _NavbarState extends State<Navbar> {
   int _selectedIndex = 0;
   static List<Widget> widgetsList = <Widget>[
     HomePage(),
-    Trips(),
+    AllTrips(),
     PlacesScreen(),
     teamsScreen()
   ];

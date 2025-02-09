@@ -7,9 +7,9 @@ import 'package:http/http.dart' as http;
 import 'package:terez/core/shared/widgets/backButton.dart';
 
 class TripDetailsPic extends StatelessWidget {
-  final String coverPic;
-  final String title;
-  final String place;
+  final String? coverPic;
+  final String? title;
+  final String? place;
   // final List<String> pics;
   const TripDetailsPic({
     super.key,
@@ -92,7 +92,7 @@ class TripDetailsPic extends StatelessWidget {
                 Container(
                   width: 280,
                   child: Text(
-                    place,
+                    place!,
                     style: const TextStyle(
                         fontSize: 15, fontWeight: FontWeight.w200),
                   ),

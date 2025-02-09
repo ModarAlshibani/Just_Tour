@@ -8,8 +8,8 @@ import 'package:terez/view/widgets/Follow/Follow.dart';
 
 class TeamDet extends StatelessWidget{
 
-  final String teamName;
-  final String teamPic;
+  final String? teamName;
+  final String? teamPic;
 
 const TeamDet({super.key, required this.teamName, required this.teamPic, });
 
@@ -66,29 +66,29 @@ const TeamDet({super.key, required this.teamName, required this.teamPic, });
                              ),
                            ),
                     SizedBox(height: 8,),
-                           RatingBar.builder(
-                            initialRating: 0,
-                            minRating: 0,
-                            direction: Axis.horizontal,
-                            itemCount: 5,
-                            itemSize: 30,
-                            itemPadding: EdgeInsets.symmetric(horizontal: 2),
-                            itemBuilder: (context, _) => Icon(
-                              Icons.star,
-                              color: Colors.amber,
-                             ),
-                               onRatingUpdate: (rating) {
-                                 print(rating);
-                               },
-                            ),
+                          //  RatingBar.builder(
+                          //   initialRating: 0,
+                          //   minRating: 0,
+                          //   direction: Axis.horizontal,
+                          //   itemCount: 5,
+                          //   itemSize: 30,
+                          //   itemPadding: EdgeInsets.symmetric(horizontal: 2),
+                          //   itemBuilder: (context, _) => Icon(
+                          //     Icons.star,
+                          //     color: Colors.amber,
+                          //    ),
+                          //      onRatingUpdate: (rating) {
+                          //        print(rating);
+                          //      },
+                          //   ),
                             
                   ],
                            ),
                ),
-                         Positioned(
-          top: 50, right: 5,
-           child: Follow(buttonColor: Color.fromARGB(255, 243, 97, 60), textColor: AppColors.rumSwizzle, state: false, textSize: 17, height: 40, width: 80,),
-         ),
+        //                  Positioned(
+        //   top: 50, right: 5,
+        //    child: Follow(buttonColor: Color.fromARGB(255, 243, 97, 60), textColor: AppColors.rumSwizzle,textSize: 17, height: 40, width: 80, buttonText: '',),
+        //  ),
          Positioned(
           top: 45,
           left: 9,

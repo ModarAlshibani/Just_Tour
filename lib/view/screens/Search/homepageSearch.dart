@@ -7,7 +7,6 @@ import 'package:terez/data/dataSource/statics/static.dart';
 import 'package:terez/data/model/place_model.dart';
 import 'package:terez/data/model/trip_model.dart';
 import 'package:terez/view/screens/Places/placeDetails.dart';
-import 'package:terez/view/screens/Trips/TripDetailScreen.dart';
 
 class HomepageSearchScreen extends StatefulWidget{
   const HomepageSearchScreen ({Key? key,}) : super(key: key);

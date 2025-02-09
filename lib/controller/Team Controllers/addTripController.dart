@@ -9,10 +9,10 @@ import 'package:terez/APIs.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:terez/controller/auth/Token.dart';
-import 'package:terez/view/screens/TeamUI/AddTrip.dart';
+import 'package:terez/view/screens/TeamUI/teamNavbar.dart';
 
 abstract class AddTripController extends GetxController {
-  addTrip();
+  //addTrip();
 }
 
 class AddTripControllerImp extends AddTripController {
@@ -41,7 +41,7 @@ class AddTripControllerImp extends AddTripController {
     print("EndDate: ${EndDate.text.toString()}");
     print("StartBooking: ${StartBooking.text.toString()}");
     print("EndBooking: ${EndBooking.text.toString()}");
-
+    print("EndBooking: ${RetrieveEndDate.text.toString()}");
     final Map<String, dynamic> body = {
       "Title": Title.text,
       "Location": Location.text,
@@ -84,7 +84,7 @@ class AddTripControllerImp extends AddTripController {
         print(jsonResponse["message"]);
 
         // Navigate to the next screen or update UI as needed
-        Get.toNamed('/nav');
+        Get.to(TeamNavbar());
       } else {
         print("Failed to add the trip");
         print(response.statusCode);
@@ -93,7 +93,7 @@ class AddTripControllerImp extends AddTripController {
 
         Get.dialog(
           AlertDialog(
-            title: Text("Login Failed"),
+            title: Text("Adding Trip Failed"),
             content: Text(
               errorMessage,
               style: TextStyle(color: Colors.black),
@@ -108,15 +108,14 @@ class AddTripControllerImp extends AddTripController {
         );
       }
     } catch (error) {
-      print("Error during Login: $error");
+      print("Error during Adding: $error");
     }
   }
 
-  @override
-  addTrip() {
-    // TODO: implement addTrip
-    var formData = formStateAddTrip.currentState;
-  }
+  // @override
+  // addTrip() {
+  //   var formData = formStateAddTrip.currentState;
+  // }
 
   @override
   void onInit() {

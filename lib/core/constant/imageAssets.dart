@@ -19,4 +19,5 @@ class imageAsset {
   static const soil2 = "$root/soil2.jpg";
   static const sky1 = "$root/sky1.jpg";
   static const sky2 = "$root/sky2.jpg";
+  static const rabee = "$root/rabee.jpg";
 }

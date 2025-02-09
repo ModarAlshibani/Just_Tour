@@ -1,6 +1,6 @@
-import 'dart:io';
+// Modar
 import 'dart:ui';
-import 'package:date_time_picker/date_time_picker.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -67,186 +67,336 @@ class _AddTripState extends State<AddTrip> {
     // }
 
     return Scaffold(
-        body: Form(
-      key: controller.formStateAddTrip,
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            AddTripField(
-              myController: controller.Title,
-              initialText: "Trip Title",
-              leadingIcon: Icon(Icons.edit),
+        body: Container(
+          child: Stack(
+            children: [
+              Positioned.fill(
+              child: ImageFiltered(
+                imageFilter: ImageFilter.blur(sigmaX: 0.0, sigmaY: 0.0),
+                child: Image.asset(
+                  imageAsset.soil,
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
-            SizedBox(
-              height: 10,
+             Padding(
+              padding: const EdgeInsets.only(
+                top: 40,
+                left: 30,
+              ),
+              child: Container(
+                height: 50,
+                width: 70,
+                decoration: BoxDecoration(
+                  color: AppColors.whiteSmoke,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: IconButton(
+                    onPressed: () => Get.back(),
+                    icon: Icon(
+                      Icons.arrow_back,
+                      color: AppColors.midnightGreen,
+                      size: 30,
+                    )),
+              ),
             ),
-            AddTripField(
-              myController: controller.Location,
-              initialText: "Trip Location",
-              leadingIcon: Icon(Icons.location_on_outlined),
+            Positioned(
+              top: 190,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row( crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    AddTripPhoto(),
+                  ],
+                ),
+              ),
             ),
-            SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            ElevatedButton(
-                onPressed: () => selectDate(controller.StartDate),
-                child: Text("Start date")),
-            ElevatedButton(
-                onPressed: () => selectDate(controller.EndDate),
-                child: Text("End date")),
-            ElevatedButton(
-                onPressed: () => selectDate(controller.StartBooking),
-                child: Text("Start Booking")),
-            ElevatedButton(
-                onPressed: () => selectDate(controller.EndBooking),
-                child: Text("End Booking")),
-            SizedBox(
-              height: 10,
-            ),
-            DropdownButton<String>(
-              value: controller.Type.text.isEmpty ? null : controller.Type.text,
-              items: Type.map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-              onChanged: (String? newValue) {
-                if (newValue != null) {
-                  setState(() {
-                    controller.Type.text = newValue;
-                  });
-                }
-              },
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            DropdownButton<String>(
-              value:
-                  controller.Level.text.isEmpty ? null : controller.Level.text,
-              items: Level.map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-              onChanged: (String? newValue) {
-                if (newValue != null) {
-                  setState(() {
-                    controller.Level.text = newValue;
-                  });
-                }
-              },
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            AddTripField(
-              myController: controller.SubLimit,
-              initialText: "Maximum subscribers",
-              leadingIcon: Icon(Icons.edit),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            AddTripField(
-              myController: controller.Cost,
-              initialText: "Cost",
-              leadingIcon: Icon(Icons.edit),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            AddTripField(
-              myController: controller.Description,
-              initialText: "Description",
-              leadingIcon: Icon(Icons.edit),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            DropdownButton<String>(
-              value: controller.Retrieve.text.isEmpty
-                  ? null
-                  : controller.Retrieve.text,
-              items: YesOrNo.map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-              onChanged: (String? newValue) {
-                if (newValue != null) {
-                  setState(() {
-                    controller.Retrieve.text = newValue;
-                  });
-                }
-              },
-            ),
-            AddTripField(
-              myController: controller.Retrieve,
-              initialText: "is retrive?",
-              leadingIcon: Icon(Icons.edit),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            AddTripField(
-              myController: controller.Requirements,
-              initialText: "Requirements",
-              leadingIcon: Icon(Icons.edit),
-            ),
-            SizedBox(
-              height: 10,
-            ),
+              Padding(
+                padding: const EdgeInsets.only(top: 280),
+                child: Container(
+                  width: double.infinity,
+                height: double.infinity,
+                decoration: BoxDecoration(
+                  color: AppColors.whiteSmoke,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(40),
+                    topRight: Radius.circular(40),
+                  ),
+                ),
+                  child: Form(
+                        key: controller.formStateAddTrip,
+                        child: Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                AddTripField(
+                                  myController: controller.Title,
+                                  initialText: "Trip Title",
+                                  leadingIcon: Icon(Icons.edit),
+                                  ),
+                                 
+                                 SizedBox(height: 15,),
 
-            // ElevatedButton(
-            //     onPressed: () => pickAndSetImage(),
-            //     child: Text("choose image")),
+                                 AddTripField(
+                                  myController: controller.Location,
+                                  initialText: "Trip Location",
+                                  leadingIcon: Icon(Icons.location_on_outlined),
+                                  ),
+                                  
+                                  SizedBox(height: 30,),
 
-            AddTripField(
-              myController: controller.TripPhoto,
-              initialText: "Trip Photo",
-              leadingIcon: Icon(Icons.edit),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            ElevatedButton(
-                onPressed: () => selectDate(controller.RetrieveEndDate),
-                child: Text("Retrieve End Date")),
-            AddTripField(
-              myController: controller.RetrieveEndDate,
-              initialText: "Retrieve End Date",
-              leadingIcon: Icon(Icons.edit),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            AddTripField(
-              myController: controller.Percent,
-              initialText: "Percent",
-              leadingIcon: Icon(Icons.edit),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            ElevatedButton(
-                onPressed: () => controller.addTrip(),
-                child: Text("goooooooooooooo"))
-          ],
-        ),
-      ),
-    ));
+                                 Row(mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox( 
+                                        height: 50,
+                                        width: 120,
+                                        child: ElevatedButton( style: ElevatedButton.styleFrom(
+                                          backgroundColor: AppColors.grey,
+                                          shape: RoundedRectangleBorder(
+                                           borderRadius: BorderRadius.circular(10),
+                                           ),
+                                        ),
+                                          onPressed: () => selectDate(controller.StartDate),
+                                          child: Text("Start date",
+                                          style: TextStyle(
+                                            color: AppColors.blackCurrant,
+                                            fontSize: 15,
+                                          ),),
+                                          
+                                          ),
+                                      ),
+                                      SizedBox(width: 30,),
+                                      SizedBox(
+                                        height: 50,
+                                        width: 120,
+                                        child: ElevatedButton(
+                                          onPressed: () => selectDate(controller.EndDate),
+                                          child: Text("End date",
+                                          style: TextStyle(
+                                            color: AppColors.blackCurrant,
+                                            fontSize: 15,
+                                          ),),
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: AppColors.grey,
+                                            shape: RoundedRectangleBorder(
+                                             borderRadius: BorderRadius.circular(10),
+                                             ),
+                                          ),
+                                          ),
+                                      ),
+                                    ],
+                                   ),
+                                   SizedBox(height: 15,),
+                                 Row( mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        height: 50,
+                                        width: 150,
+                                        child: ElevatedButton(
+                                          onPressed: () => selectDate(controller.StartBooking),
+                                          child: Text("Start Booking",
+                                            style: TextStyle(
+                                              color: AppColors.blackCurrant,
+                                              fontSize: 15,
+                                            ),),
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor: AppColors.grey,
+                                              shape: RoundedRectangleBorder(
+                                               borderRadius: BorderRadius.circular(10),
+                                               ),
+                                            ),
+                                          ),
+                                      ),
+                                        SizedBox(width: 30,),
+                                      SizedBox(
+                                        height: 50,
+                                        width: 150,
+                                        child: ElevatedButton(
+                                          onPressed: () => selectDate(controller.EndBooking),
+                                          child: Text("End Booking",
+                                            style: TextStyle(
+                                              color: AppColors.blackCurrant,
+                                              fontSize: 15,
+                                            ),),
+                                            style: ElevatedButton.styleFrom(
+                                              backgroundColor: AppColors.grey,
+                                              shape: RoundedRectangleBorder(
+                                               borderRadius: BorderRadius.circular(10),
+                                               ),
+                                            ),
+                                          ),
+                                      ),
+                                      ],
+                                     ),
+                                SizedBox(height: 20,),
+
+                                  Row( mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      DropdownButton<String>(
+                                        hint: Text("Type :"),
+                                        value: controller.Type.text.isEmpty ? null : controller.Type.text,
+                                        items: Type.map<DropdownMenuItem<String>>((String value) {
+                                          return DropdownMenuItem<String>(
+                                            value: value,
+                                            child: Text(value),
+                                          );
+                                        }).toList(),
+                                        onChanged: (String? newValue) {
+                                          if (newValue != null) {
+                                            setState(() {
+                                              controller.Type.text = newValue;
+                                            });
+                                          }
+                                        },
+                                      ),
+                                  SizedBox(width: 50,),
+                                  DropdownButton<String>(
+                                    hint: Text("Level :"),
+                                    value:
+                                        controller.Level.text.isEmpty ? null : controller.Level.text,
+                                    items: Level.map<DropdownMenuItem<String>>((String value) {
+                                      return DropdownMenuItem<String>(
+                                        value: value,
+                                        child: Text(value),
+                                      );
+                                    }).toList(),
+                                    onChanged: (String? newValue) {
+                                      if (newValue != null) {
+                                        setState(() {
+                                          controller.Level.text = newValue;
+                                        });
+                                      }
+                                    },
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(height: 20,),
+
+                                AddTripField(
+                                  myController: controller.SubLimit,
+                                  initialText: "Maximum subscribers",
+                                  leadingIcon: Icon(Icons.groups_3_outlined),
+                                            ),
+                                SizedBox(height: 15,),
+
+                                AddTripField(
+                                  myController: controller.Cost,
+                                  initialText: "Cost",
+                                  leadingIcon: Icon(Icons.attach_money_outlined),
+                                            ),
+                                SizedBox(height: 15,),
+
+                                AddTripField(
+                                  myController: controller.Description,
+                                  initialText: "Description",
+                                  leadingIcon: Icon(Icons.edit),
+                                            ),
+
+                                SizedBox(height: 15,),
+
+                                DropdownButton<String>(
+                          value: controller.Retrieve.text.isEmpty
+                              ? null
+                              : controller.Retrieve.text,
+                          items: YesOrNo.map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                          onChanged: (String? newValue) {
+                            if (newValue != null) {
+                              setState(() {
+                                controller.Retrieve.text = newValue;
+                              });
+                            }
+                          },
+                                            ),
+                                AddTripField(
+                          myController: controller.Retrieve,
+                          initialText: "is retrive?",
+                          leadingIcon: Icon(Icons.edit),
+                                            ),
+                                            SizedBox(height: 15,),
+                                            AddTripField(
+                          myController: controller.Requirements,
+                          initialText: "Requirements",
+                          leadingIcon: Icon(Icons.edit),
+                                            ),
+                                            SizedBox(height: 10,),
+                                        
+                                            // ElevatedButton(
+                                            //     onPressed: () => pickAndSetImage(),
+                                            //     child: Text("choose image")),
+                                        
+                                            AddTripField(
+                          myController: controller.TripPhoto,
+                          initialText: "Trip Photo",
+                          leadingIcon: Icon(Icons.edit),
+                                            ),
+                                            SizedBox(height: 20,),
+                                            
+                                            SizedBox(
+                                              height: 50,
+                                        width: 170,
+                                              child: ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                backgroundColor: AppColors.grey,
+                                                shape: RoundedRectangleBorder(
+                                                 borderRadius: BorderRadius.circular(10),
+                                                 ),
+                                              ),
+                                                                          onPressed: () => selectDate(controller.RetrieveEndDate),
+                                                                          child: Text("Retrieve End Date",
+                                                                          style: TextStyle(
+                                                color: AppColors.blackCurrant,
+                                                fontSize: 15,
+                                              ),),),
+                                            ),
+                        SizedBox(height: 15,),
+                       AddTripField(
+                          myController: controller.RetrieveEndDate,
+                          initialText: "Retrieve End Date",
+                          leadingIcon: Icon(Icons.edit),
+                                            ),
+                                            SizedBox(height: 15,),
+                                            
+                       AddTripField(
+                          myController: controller.Percent,
+                          initialText: "Percent",
+                          leadingIcon: Icon(Icons.percent),
+                                            ),
+                       SizedBox(height: 25,),
+
+                                            SizedBox(
+                                              height: 50,
+                                              width: 150,
+                                              child: ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                backgroundColor: AppColors.orange,
+                                                shape: RoundedRectangleBorder(
+                                                 borderRadius: BorderRadius.circular(10),
+                                                 ),
+                                              ),
+                                              onPressed: () => controller.AddTrip(),
+                                              child: Text("Add the Trip",
+                                              style: TextStyle(
+                                                color: AppColors.whiteSmoke,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w600
+                                              ),),
+                                                                          ),
+                                            )
+                                          ],
+                                        ),
+                          ),
+                        ),
+                      ),
+                ),
+              ),
+            ],
+          ),
+        ));
   }
 }

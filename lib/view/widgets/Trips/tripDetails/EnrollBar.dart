@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:terez/core/constant/appColors.dart';
 
 class EnrollBar extends StatelessWidget {
-  final int cost;
+  final int? cost;
   const EnrollBar({super.key, required this.cost});
 
   @override
@@ -29,7 +29,7 @@ class EnrollBar extends StatelessWidget {
                       fontSize: 15),
                 ),
                 Text(
-                  "$cost Sp",
+                  cost!.toString() + "S.p",
                   style: TextStyle(
                       color: AppColors.blackCurrant,
                       fontSize: 22,

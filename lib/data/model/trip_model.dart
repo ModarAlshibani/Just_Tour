@@ -1,5 +1,3 @@
-// ignore: constant_identifier_names
-// ignore_for_file: non_constant_identifier_names
 import 'dart:convert';
 
 class TripModel {

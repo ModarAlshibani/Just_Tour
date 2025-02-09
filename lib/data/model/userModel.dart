@@ -1,11 +1,11 @@
 class User {
-  String? id;
+  int? id;
   String? FirstName;
   String? LastName;
   String? Number;
   String? Email;
   String? Password;
-  String? Wallet;
+  int? Wallet;
   int? Age;
   String? Token;
   DateTime? createdAt; // New field for created_at
@@ -25,7 +25,7 @@ class User {
       this.updatedAt});
 
   User.fromJson(Map<String, dynamic> json) {
-    id = json['_id'];
+    id = json['id'];
     FirstName = json['FirstName'];
     LastName = json['LastName'];
     Number = json['Number'];
@@ -34,14 +34,14 @@ class User {
     Wallet = json['Wallet'];
     Age = json['Age'];
     Token = json['Token'];
+    createdAt: DateTime.parse(json['created_at']);
+    updatedAt: DateTime.parse(json['updated_at']);
     // Assuming the dates are in ISO format, convert them to DateTime objects
-    createdAt = DateTime.parse(json['created_at']);
-    updatedAt = DateTime.parse(json['updated_at']);
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.id;
+    data['id'] = this.id;
     data['FirstName'] = this.FirstName;
     data['LastName'] = this.LastName;
     data['Number'] = this.Number;
@@ -50,8 +50,8 @@ class User {
     data['Wallet'] = this.Wallet;
     data['Age'] = this.Age;
     data['Token'] = this.Token;
-    data['createdAt'] = this.createdAt?.toIso8601String();
-    data['updatedAt'] = this.updatedAt?.toIso8601String();
+    data['creates_at'] = this.createdAt.toString();
+    data['updated_at'] = this.updatedAt.toString();
     return data;
   }
 }

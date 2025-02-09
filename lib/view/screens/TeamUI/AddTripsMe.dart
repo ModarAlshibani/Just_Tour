@@ -16,6 +16,7 @@ class AddTrips extends StatefulWidget {
 class _AddTripsState extends State<AddTrips> {
   var TripType;
   var TripLevel;
+  var isRetrievable;
   List<String> Type = [
     "Tour",
     "Adventure",
@@ -24,7 +25,7 @@ class _AddTripsState extends State<AddTrips> {
     "Leisure"
   ];
   List<String> Level = ["Hard", "Medium", "Easy"];
-  List<String> YesOrNo = ["True", "False"];
+  List<String> YesOrNo = ["true", "false"];
 
   TextEditingController dateController = TextEditingController();
   TextEditingController dateController1 = TextEditingController();
@@ -83,23 +84,7 @@ class _AddTripsState extends State<AddTrips> {
               top: 190,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Row(
-                  children: [
-                    AddTripPhoto(),
-                    SizedBox(
-                      width: 9,
-                    ),
-                    AddTripPhoto(),
-                    SizedBox(
-                      width: 9,
-                    ),
-                    AddTripPhoto(),
-                    SizedBox(
-                      width: 9,
-                    ),
-                    AddTripPhoto(),
-                  ],
-                ),
+                child: AddTripPhoto(),
               ),
             ),
             Padding(
@@ -251,12 +236,12 @@ class _AddTripsState extends State<AddTrips> {
                               child: Center(
                                 child: DropdownButton<String>(
                                   hint: Text("Retriveable? "),
-                                  value: TripLevel,
+                                  value: isRetrievable,
                                   onChanged: (newValue) {
                                     if (newValue != null) {
                                       setState(() {
-                                        TripLevel = newValue;
-                                        controller.Level.text = newValue;
+                                        isRetrievable = newValue;
+                                        controller.Retrieve.text = newValue;
                                       });
                                     }
                                   },
@@ -276,7 +261,7 @@ class _AddTripsState extends State<AddTrips> {
                               height: 50,
                               width: 142,
                               child: TextField(
-                                controller: controller.StartDate,
+                                controller: controller.RetrieveEndDate,
                                 decoration: InputDecoration(
                                   labelText: "Last date",
                                   labelStyle: TextStyle(fontSize: 14),
@@ -289,7 +274,7 @@ class _AddTripsState extends State<AddTrips> {
                                 ),
                                 readOnly: true,
                                 onTap: () {
-                                  selectDate(controller.StartDate);
+                                  selectDate(controller.RetrieveEndDate);
                                 },
                               ),
                             ),
@@ -411,8 +396,16 @@ class _AddTripsState extends State<AddTrips> {
                         SizedBox(
                           height: 15,
                         ),
+                        AddTripField(
+                          initialText: "Paste a photo link here",
+                          leadingIcon: Icon(Icons.photo),
+                          myController: controller.TripPhoto,
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
                         MaterialButton(
-                          onPressed: () => controller.addTrip(),
+                          onPressed: () => controller.AddTrip(),
                           child: Container(
                             height: 50,
                             width: 100,

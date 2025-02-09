@@ -2,25 +2,68 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:terez/controller/Team%20Controllers/followingController.dart';
+import 'package:terez/controller/Team%20Controllers/showTeamsController.dart';
 import 'package:terez/core/constant/appColors.dart';
 import 'package:terez/core/constant/imageAssets.dart';
+import 'package:terez/data/model/team_model.dart';
+import 'package:terez/data/model/trip_model.dart';
 import 'package:terez/view/widgets/Teams/teamDet.dart';
+import 'package:terez/controller/Trips%20Controller/showTeamMyTripsController.dart';
 
-class taemsDetails extends StatelessWidget{
-  final String? teamName;
-final String? teamPic;
-final String? description;
-//final String? tripsList;
+class TaemsDetailsScreen extends StatefulWidget{
+final int? id;
 
-const taemsDetails({super.key, required this.teamName, required this.teamPic, required this.description, /*required this.tripsList*/});
-  
-  
+
+const TaemsDetailsScreen({super.key,this.id,});
+
+  @override
+  State<TaemsDetailsScreen> createState() => _taemsDetailsState();
+}
+
+late Future<TeamModel?> team;
+//late Future<List<TripModel>?> teamTrips;
+//late Future follow;
+
+class _taemsDetailsState extends State<TaemsDetailsScreen> {
+   @override
+  void initState() {
+    team = ShowTeamsController().userGetTeamDetails(widget.id);
+   // teamTrips = ShowTeamTripsController().getTrips(widget.id);
+   // follow = FollowController().fetchFollowStatus(widget.id);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    
+    team = ShowTeamsController().userGetTeamDetails(widget.id);
+    //teamTrips = ShowTeamTripsController().getTrips(widget.id);
     ScrollController _scrollController = ScrollController();
+     print(
+        "================================================================================");
+    print(widget.id);
+    print(
+        "================================================================================");
     
     return Scaffold(
-      body: Stack(
+      body: FutureBuilder<TeamModel?>(
+        future: team,
+        builder: (context, teamInfo) {
+          if(teamInfo.hasData){
+            return getTeamDetails(teamInfo);
+          } else if(teamInfo.hasError){
+            return Text(' ${teamInfo.error}');
+          } else{
+            return const Center(child:CircularProgressIndicator() );
+          }
+        
+        },
+      ),
+    
+    );
+  }
+}
+Widget getTeamDetails(AsyncSnapshot<TeamModel?> teamInfo) =>
+   Stack(
         children: [
           Container(
             height: double.infinity,
@@ -30,7 +73,10 @@ const taemsDetails({super.key, required this.teamName, required this.teamPic, re
 
           Column(
             children: [
-              TeamDet( teamName: teamName!, teamPic: teamPic!),
+              TeamDet( 
+                teamName: teamInfo.data?.TeamName,
+                teamPic: teamInfo.data?.ProfilePhoto,
+                ),
               
                Container( 
                              decoration: BoxDecoration(
@@ -54,9 +100,9 @@ const taemsDetails({super.key, required this.teamName, required this.teamPic, re
             Padding(
               padding: const EdgeInsets.all(10),
               child: const Text(
-                "Description:",
+                "  Description:",
                 style: TextStyle(
-                    color: AppColors.blackCurrant,
+                    color: AppColors.midnightGreen,
                     fontSize: 18,
                     fontWeight: FontWeight.w800),
               ),
@@ -64,7 +110,27 @@ const taemsDetails({super.key, required this.teamName, required this.teamPic, re
             Padding(
               padding: const EdgeInsets.only(left: 10, bottom: 10, right: 10),
               child: Text(
-                description!,
+                "${teamInfo.data?.Description}",
+                style: TextStyle(
+                                       fontSize: 15,
+                                        color: Colors.black,
+                                       ), ),
+            ),
+            SizedBox(height: 10,),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: const Text(
+                "  Contact Info:",
+                style: TextStyle(
+                    color: AppColors.midnightGreen,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w800),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 10, bottom: 10, right: 10),
+              child: Text(
+                "${teamInfo.data?.ContactInfo}",
                 style: TextStyle(
                                        fontSize: 15,
                                         color: Colors.black,
@@ -86,7 +152,6 @@ const taemsDetails({super.key, required this.teamName, required this.teamPic, re
                             width: 500,
                            
                             child: ListView.builder(
-                                controller: _scrollController,
                                 scrollDirection: Axis.horizontal,
                                 itemCount: 5,
                                 itemBuilder: (context, index) {
@@ -135,9 +200,5 @@ const taemsDetails({super.key, required this.teamName, required this.teamPic, re
          
 
         ],
-      ),
-    );
-  }
-
-
-}
+      );
+   

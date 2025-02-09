@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:terez/core/constant/appColors.dart';
 
 class MainInfoRow extends StatelessWidget {
-  final String teamName;
-  final String type;
-  final String level;
-  final DateTime startDate;
-  final DateTime endDate;
+  final String? teamName;
+  final String? type;
+  final String? level;
+  final DateTime? startDate;
+  final DateTime? endDate;
   const MainInfoRow(
       {super.key,
       required this.teamName,
@@ -33,7 +33,7 @@ class MainInfoRow extends StatelessWidget {
                   width: 65,
                   height: 20,
                   child: Text(
-                    teamName,
+                    teamName!,
                     textAlign: TextAlign.center,
                     style: const TextStyle(color: Colors.black54),
                   ),
@@ -51,7 +51,7 @@ class MainInfoRow extends StatelessWidget {
                   size: 23,
                 ),
                 Text(
-                  type,
+                  type!,
                   style: const TextStyle(color: Colors.black54),
                 )
               ],
@@ -67,7 +67,7 @@ class MainInfoRow extends StatelessWidget {
                   size: 23,
                 ),
                 Text(
-                  level.substring(6),
+                  level!,
                   style: const TextStyle(color: Colors.black54),
                 )
               ],
@@ -114,7 +114,7 @@ class MainInfoRow extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    "   ${startDate.day} / ${startDate.month} / ${startDate.year}",
+                    "   ${startDate!.day} / ${startDate!.month} / ${startDate!.year}",
                     style: const TextStyle(color: Colors.black54, fontSize: 18),
                   )
                 ],
@@ -154,7 +154,7 @@ class MainInfoRow extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    "   ${endDate.day} / ${endDate.month} / ${endDate.year}",
+                    "   ${endDate!.day} / ${endDate!.month} / ${endDate!.year}",
                     style: const TextStyle(color: Colors.black54, fontSize: 18),
                   )
                 ],

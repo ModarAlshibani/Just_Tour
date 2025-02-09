@@ -1,47 +1,54 @@
-import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:terez/core/constant/appColors.dart';
+import 'package:terez/APIs.dart';
 
-class Follow extends StatelessWidget{
 
-   final bool? state;
-   final Color? buttonColor;
-   final Color? textColor;
-   final double? textSize; 
-   final double? height;
-   final double? width;
-   
 
-   const Follow({super.key, required this.buttonColor, required this.textColor, required this.state, required this.textSize,
-   required this.height, required this.width});
+
+
+
+class FollowButton extends StatefulWidget {
+  final int targetUserId;
+
+  const FollowButton({Key? key, required this.targetUserId}) : super(key: key);
 
   @override
+  _FollowButtonState createState() => _FollowButtonState();
+}
 
-  Widget build(BuildContext context){
+class _FollowButtonState extends State<FollowButton> {
+  bool isFollowing = false;
 
-    return MaterialButton(
-                              onPressed: (){print("object");},
-                              child: Container( 
-                                height: height,
-                                width: width, 
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                    color: AppColors.blackCurrant,
-                                    offset: Offset(0.0, 0.1),
-                                    blurRadius: 2.0,
-                                    ),
-                                  ],
-                                  color: buttonColor,
-                                  borderRadius: BorderRadius.circular(10,),
-                                ),
-                                child: Center(child: Text('Follow',
-                                style: TextStyle(
-                                  color: textColor,
-                                  fontSize: textSize,
-                                  fontWeight: FontWeight.bold,
-                                ),)),
-                              ),
-                            );
+  @override
+  void initState() {
+    super.initState();
+   // _loadFollowStatus();
+  }
+
+  // Future<void> _loadFollowStatus() async {
+  //   try {
+  //     isFollowing = await FollowController().getFollowStatus(widget.targetUserId);
+  //     setState(() {});
+  //   } catch (e) {
+  //     // Handle error
+  //   }
+  // }
+
+  // Future<void> toggleFollow() async {
+  //   if (isFollowing) {
+  //     await FollowController().unfollowUser(widget.targetUserId);
+  //   } else {
+  //     await FollowController().followUser(widget.targetUserId);
+  //   }
+  //   _loadFollowStatus(); // Refresh the follow status after toggling
+  // }
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: (){},
+      child: Text(isFollowing ? 'Unfollow' : 'Follow'),
+    );
   }
 }

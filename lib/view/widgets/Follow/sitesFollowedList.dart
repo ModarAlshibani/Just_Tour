@@ -66,7 +66,7 @@ class SitesFollowedList extends StatelessWidget{
                   ],
                 ),
               ),
-              Follow(buttonColor: AppColors.orange, textColor: AppColors.whiteSmoke, state: false, textSize: 13, height: 30, width: 70)
+            //  Follow()
               ],
             ),
           ),

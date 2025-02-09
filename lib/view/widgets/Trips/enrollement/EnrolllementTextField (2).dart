@@ -20,6 +20,7 @@ class EnrollementTextField extends StatelessWidget {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 40),
       child: TextFormField(
+        controller: myController,
         validator: valid,
         decoration: InputDecoration(
           hintText: hint,

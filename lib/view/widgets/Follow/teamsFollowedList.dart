@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:terez/core/constant/appColors.dart';
-import 'package:terez/core/constant/imageAssets.dart';
 import 'package:terez/view/widgets/Follow/Follow.dart';
 
 class TeamsFollowedList extends StatelessWidget{
@@ -72,7 +71,7 @@ class TeamsFollowedList extends StatelessWidget{
                   ],
                 ),
               ),
-              Follow(buttonColor: AppColors.orange, textColor: AppColors.whiteSmoke, state: false, textSize: 13, height: 30, width: 70)
+           ///  Follow(),
               ],
             ),
           ),

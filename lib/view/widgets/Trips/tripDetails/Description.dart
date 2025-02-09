@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:terez/core/constant/appColors.dart';
 
 class DescriptionText extends StatelessWidget {
-  final String description;
+  final String? description;
   const DescriptionText({super.key, required this.description});
 
   @override
@@ -23,7 +23,7 @@ class DescriptionText extends StatelessWidget {
                   fontWeight: FontWeight.w800),
             ),
             Text(
-              "$description",
+              description!,
               style:
                   const TextStyle(color: AppColors.blackCurrant, fontSize: 14),
             ),

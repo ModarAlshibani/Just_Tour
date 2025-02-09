@@ -7,9 +7,8 @@ import 'package:terez/view/widgets/Follow/Follow.dart';
 class SitesOutside extends StatelessWidget{
 
   final String? placeName;
-  final String? placePic;
 
-  const SitesOutside({super.key, this.placeName, this.placePic});
+  const SitesOutside({super.key, this.placeName, });
 
   @override
 
@@ -26,7 +25,7 @@ class SitesOutside extends StatelessWidget{
                               width: 390,
                               decoration: BoxDecoration(
                                 image: DecorationImage(
-                                  image: NetworkImage(placePic!),
+                                  image: NetworkImage(imageAsset.camping),
                                 fit: BoxFit.fill),
                                 borderRadius: BorderRadius.circular(10),
                               ),
@@ -66,11 +65,11 @@ class SitesOutside extends StatelessWidget{
                           ),
                           ),
                         ),
-                        Positioned(
-                          top: 2,
-                          right: 5,
-                          child: Follow(buttonColor: AppColors.whiteSmoke, textColor: AppColors.orange, state: false, textSize: 14, height: 30, width: 60)
-                        ),
+                        // Positioned(
+                        //   top: 2,
+                        //   right: 5,
+                        //   child: Follow(buttonColor: AppColors.whiteSmoke, textColor: AppColors.orange,textSize: 14, height: 30, width: 60, buttonText: '',)
+                        // ),
                       ],
                     ),
                   );

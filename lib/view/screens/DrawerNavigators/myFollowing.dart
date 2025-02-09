@@ -76,57 +76,45 @@ class _MyFollowingState extends State<MyFollowing> {
               ),
             ),
           ),
-            Padding(
-              padding: const EdgeInsets.only(top: 180),
-              child: Container(
-                width: double.infinity,
-              height: double.infinity,
-              decoration: BoxDecoration(
-                color: AppColors.whiteSmoke,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                  topRight: Radius.circular(30),
-                ),
-              ),
-              child: show? ListView.builder(
-                itemCount: TeamsList.length,
-                 itemBuilder: (context, index) => InkWell(
-                  onTap: () => Get.to(
-                        taemsDetails(
-                          teamName: TeamsList[index].teamName,
-                          teamPic:  TeamsList[index].teamPic!, 
-                          description: TeamsList[index].description!, 
-                        ),
-                      ),
-                   child: Container(
-                     child: TeamsFollowedList(
-                      picture: TeamsList[index].teamPic!,
-                      name: TeamsList[index].teamName!,
-                                     ),
-                   ),
-                 ),
-              ): ListView.builder(
-                itemCount: placesList.length,
-                itemBuilder: (context, index) => InkWell(
-                  onTap: () => Get.to(PlaceDetails(
-                              placeId: placesList[index].placeId!,
-                              name: placesList[index].name!,
-                              location: placesList[index].location!,
-                              description: placesList[index].description!,
-                              coverPic: placesList[index].coverPic!,
-                              pics: placesList[index].pics!,
-                              )),
+      //       Padding(
+      //         padding: const EdgeInsets.only(top: 180),
+      //         child: Container(
+      //           width: double.infinity,
+      //         height: double.infinity,
+      //         decoration: BoxDecoration(
+      //           color: AppColors.whiteSmoke,
+      //           borderRadius: BorderRadius.only(
+      //             topLeft: Radius.circular(30),
+      //             topRight: Radius.circular(30),
+      //           ),
+      //         ),
+      //         child: show? ListView.builder(
+      //           itemCount: TeamsList.length,
+      //            itemBuilder: (context, index) => InkWell(
+      //             // +
+      //            ),
+      //         ): ListView.builder(
+      //           itemCount: placesList.length,
+      //           itemBuilder: (context, index) => InkWell(
+      //             onTap: () => Get.to(PlaceDetails(
+      //                         placeId: placesList[index].placeId!,
+      //                         name: placesList[index].name!,
+      //                         location: placesList[index].location!,
+      //                         description: placesList[index].description!,
+      //                         coverPic: placesList[index].coverPic!,
+      //                         pics: placesList[index].pics!,
+      //                         )),
 
                   
-                  child: Container(
-                    child: SitesFollowedList(
-                      name: placesList[index].name,
-                      picture: placesList[index].coverPic,
-                    ),
-                  ),
-                ),)
-               ),
-      ),
+      //             child: Container(
+      //               child: SitesFollowedList(
+      //                 name: placesList[index].name,
+      //                 picture: placesList[index].coverPic,
+      //               ),
+      //             ),
+      //           ),)
+      //          ),
+      // ),
       ],),);
   }
 }

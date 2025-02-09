@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
-import 'package:terez/view/screens/Trips/EnrollementScreen.dart';
+import 'package:terez/view/screens/TeamUI/teamNavbar.dart';
+import 'package:terez/view/screens/Trips/EnrollementScreen%20(2).dart';
 import 'package:terez/view/screens/auth/forget_password/emailVerfiy.dart';
 import 'package:terez/view/screens/auth/forget_password/forgetPassword.dart';
 import 'package:terez/view/screens/auth/login.dart';
@@ -16,5 +17,6 @@ List<GetPage<dynamic>>? routes = [
   GetPage(name: "/forgetPassword", page: () => const ForgetPassword()),
   GetPage(name: "/emailVerfiy", page: () => const EmailVerfiy()),
   GetPage(name: "/nav", page: () => Navbar()),
+  GetPage(name: "/teamNav", page: () => TeamNavbar()),
   GetPage(name: "/enrollementScreen", page: () => const EnrollementScreen()),
 ];

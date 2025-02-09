@@ -26,7 +26,7 @@ class Login extends StatelessWidget {
               child: ImageFiltered(
                 imageFilter: ImageFilter.blur(sigmaX: 0.0, sigmaY: 0.0),
                 child: Image.asset(
-                  imageAsset.login2,
+                  imageAsset.rabee,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -55,7 +55,7 @@ class Login extends StatelessWidget {
                 decoration: const BoxDecoration(),
                 child: CustomTextFormField(
                   valid: (val) {
-                    return validInput(val!, 8, 100, "email");
+                    return validInput(val!, 8, 100, "email",);
                   },
                   icon: Icon(Icons.email_outlined),
                   label: "LTF1".tr,

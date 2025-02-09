@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "817296311904",
+    "project_id": "test1-c74a9",
+    "storage_bucket": "test1-c74a9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:817296311904:android:50a43b73a08ff6fe84a505",
+        "android_client_info": {
+          "package_name": "com.example.terez"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVqE6kknFZH6iCqirUNe6ufSsxPsEC0ZE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,18 +1,29 @@
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:terez/controller/ProfileControllers/teamProfileController.dart';
 import 'package:terez/core/constant/appColors.dart';
 import 'package:terez/core/constant/imageAssets.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:terez/data/model/team_model.dart';
 import 'package:terez/view/widgets/TeamUI/editField.dart';
 
 class EditProfile extends StatefulWidget{
+  
+  const EditProfile({super.key});
+  
   @override
   State<EditProfile> createState() => _EditProfileState();
 }
 
+late Future<TeamModel?> team;
+
 class _EditProfileState extends State<EditProfile> {
   @override
+  void initState(){
+    team = TeamProfileControllerImp().getCurrentTeamProfile();
+  }
 
   Uint8List? _image;
 
@@ -33,9 +44,38 @@ class _EditProfileState extends State<EditProfile> {
   }
 
   Widget build(BuildContext context){
-    return Scaffold(
-      backgroundColor: AppColors.grey,
-      body: Stack(
+
+    TeamProfileControllerImp controller = Get.put(TeamProfileControllerImp());
+    team = TeamProfileControllerImp().getCurrentTeamProfile();
+    
+
+    return WillPopScope(
+       onWillPop: () async {
+        Navigator.of(context).pushReplacementNamed('/teamNav');
+        return false;
+      },
+      child: Scaffold(
+        backgroundColor: AppColors.grey,
+        body: FutureBuilder<TeamModel?>(
+          future: team,
+          builder: (context, teamInfo){
+            if(teamInfo.hasData){
+              return getTeamProfile(teamInfo);
+            } else if(teamInfo.hasError){
+              return Text("${teamInfo.error}");
+            } else{
+              return const Center(child:CircularProgressIndicator() );
+            }
+          } ,
+        ),
+      ),
+    );
+  }
+}
+
+TeamProfileControllerImp controller = Get.put(TeamProfileControllerImp());
+Widget getTeamProfile(AsyncSnapshot<TeamModel?> teamInfo) =>
+Stack(
         children: [
           Container(
             width: double.infinity,
@@ -48,7 +88,8 @@ class _EditProfileState extends State<EditProfile> {
             top: 45,
             right: 15,
             child: MaterialButton(
-              onPressed: (){print("bgggh");},
+              onPressed: (){print("bgggh");
+              controller.EditTeamProfile();},
               child: Container(
                 height: 40,
                 width: 70,
@@ -75,46 +116,46 @@ class _EditProfileState extends State<EditProfile> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Stack(
-                    alignment: AlignmentDirectional.center,
-                    children: [
-                      CircleAvatar(
-                        radius: 73,
-                        backgroundColor: AppColors.whiteSmoke,
-                      ),
-                      _image != null ?
-                      CircleAvatar(
-                        radius: 70,
-                        backgroundImage: MemoryImage(_image!),
-                      ):
-                      CircleAvatar(
-                        radius: 70,
-                        backgroundImage: AssetImage(imageAsset.camping),
-                      ),
-                      Positioned(
-                        bottom: 0,
-                        right: 0,
-                        child: CircleAvatar(
-                          radius: 20,
-                          backgroundColor: AppColors.whiteSmoke,
-                          child: IconButton(
-                            onPressed: selectImage,
-                            icon: Icon(
-                              Icons.edit,
-                              color: AppColors.varidiantGreen,
-                            ),
-                            ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  // Stack(
+                  //   alignment: AlignmentDirectional.center,
+                  //   children: [
+                  //     CircleAvatar(
+                  //       radius: 73,
+                  //       backgroundColor: AppColors.whiteSmoke,
+                  //     ),
+                  //     _image != null ?
+                  //     CircleAvatar(
+                  //       radius: 70,
+                  //       backgroundImage: MemoryImage(_image!),
+                  //     ):
+                  //     CircleAvatar(
+                  //       radius: 70,
+                  //       backgroundImage: AssetImage(imageAsset.camping),
+                  //     ),
+                  //     Positioned(
+                  //       bottom: 0,
+                  //       right: 0,
+                  //       child: CircleAvatar(
+                  //         radius: 20,
+                  //         backgroundColor: AppColors.whiteSmoke,
+                  //         child: IconButton(
+                  //           onPressed: selectImage,
+                  //           icon: Icon(
+                  //             Icons.edit,
+                  //             color: AppColors.varidiantGreen,
+                  //           ),
+                  //           ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                   SizedBox(height: 20,),
                   Container(
                     width: 300,
                     height: 60,
                     child: Center(
                       child: Text(
-                        "Team's Name",
+                        "${teamInfo.data?.TeamName}",
                         maxLines: 2,
                       style: TextStyle(
                         color: AppColors.whiteSmoke,
@@ -151,23 +192,27 @@ class _EditProfileState extends State<EditProfile> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(top: 30, left: 8, right: 8),
-                      child: EditField(initialText: "Team's Name", leadingIcon: Icon(Icons.groups), )
+                      child: EditField(
+                        initialText: "${teamInfo.data?.TeamName}", 
+                        leadingIcon: Icon(Icons.groups), )
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 8, right: 8),
-                      child: EditField(initialText: "Description", leadingIcon: Icon(Icons.info_outline),)
+                      child: EditField(
+                      myController: controller.Description,
+                      initialText: "${teamInfo.data?.Description}", 
+                      leadingIcon: Icon(Icons.info_outline),)
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 8, right: 8),
-                      child: EditField(initialText: "E-mail", leadingIcon: Icon(Icons.email_outlined), )
-                    ),
-                    Padding(
+                      child: EditField(
+                      myController: controller.ContactInfo,
+                      initialText: "${teamInfo.data?.ContactInfo}", leadingIcon: Icon(Icons.phone),)
+                    ),Padding(
                       padding: const EdgeInsets.only(left: 8, right: 8),
-                      child: EditField(initialText: "Phone Number", leadingIcon: Icon(Icons.phone),)
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8, right: 8),
-                      child: EditField(initialText: "Password", leadingIcon: Icon(Icons.password),)
+                      child: EditField(
+                      initialText: "${teamInfo.data?.Email}", 
+                      leadingIcon: Icon(Icons.email_outlined), )
                     ),
                 
                   ],
@@ -176,7 +221,4 @@ class _EditProfileState extends State<EditProfile> {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
+      );

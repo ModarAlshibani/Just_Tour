@@ -2,31 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:terez/core/constant/appColors.dart';
 
-class EditField extends StatefulWidget{
+class EditField extends StatelessWidget{
   final String? initialText;
   final Icon? leadingIcon;
+  final TextEditingController? myController;
 
-  const EditField({super.key, this.initialText, this.leadingIcon, });
-
-  @override
-  State<EditField> createState() => _EditFieldState();
-}
-
-class _EditFieldState extends State<EditField> {
-  bool _isEditing = false;
-  late TextEditingController _controller;
-
-  @override
-  void initState(){
-    super.initState();
-    _controller = TextEditingController(text: widget.initialText);
-  }
-
-  @override 
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+  const EditField({super.key, this.initialText, this.leadingIcon, this.myController, });
 
   @override
   Widget build(BuildContext context){
@@ -40,15 +21,14 @@ class _EditFieldState extends State<EditField> {
                               child: Row(
                                 children: [
                                   SizedBox(width: 10,),
-                                  Container(child: widget.leadingIcon,),
+                                  Container(child: leadingIcon,),
                                   SizedBox(width: 15,),
                                   Flexible(
                                     child: TextField(
                                       cursorColor: AppColors.midnightGreen, 
-                                      controller: _controller,
-                                      readOnly: !_isEditing,
+                                      controller: myController,
                                       decoration: InputDecoration( 
-                                        hintText: '${widget.initialText}',
+                                        hintText: '${initialText}',
                                         hintStyle: TextStyle(color: Colors.grey),
                                         focusedBorder:OutlineInputBorder(
                                         borderSide: const BorderSide(color: AppColors.midnightGreen,), 
@@ -72,9 +52,7 @@ class _EditFieldState extends State<EditField> {
                             ),
                              IconButton(
                                 onPressed: (){
-                                  setState(() {
-                                    _isEditing = !_isEditing;
-                                  });
+                                 
                                 },
                                 icon: Icon(Icons.edit,
                                 color: AppColors.varidiantGreen,),
